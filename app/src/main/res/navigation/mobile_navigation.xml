@@ -17,6 +17,17 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_recent"
+        android:name="com.example.gamekeyprices_app.ui.recent.RecentFragment"
+        android:label="@string/menu_recent"
+        tools:layout="@layout/fragment_recent">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
+            app:destination="@id/nav_home_second" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_home_second"
         android:name="com.example.gamekeyprices_app.ui.home.HomeSecondFragment"
         android:label="@string/home_second"

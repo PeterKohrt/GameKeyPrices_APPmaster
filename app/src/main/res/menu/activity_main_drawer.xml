@@ -9,8 +9,11 @@
             android:icon="@drawable/ic_menu_favorites"
             android:title="@string/menu_favorites" />
         <item
+            android:id="@+id/nav_recent"
+            android:icon="@drawable/ic_menu_recent"
+            android:title="@string/menu_recent" />
+        <item
             android:id="@+id/nav_home"
-            android:iconTint="@color/colorWhite"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
