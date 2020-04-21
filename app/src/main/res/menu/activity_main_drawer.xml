@@ -14,15 +14,46 @@
             android:title="@string/menu_recent" />
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_home"/>
+
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:color="@color/colorWhite"
+            android:title="@string/menu_category"
+            android:id="@+id/nav_category">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_action"
+                    android:title="@string/menu_action" />
+                <item
+                    android:id="@+id/nav_adventure"
+                    android:title="@string/menu_adventure" />
+                <item
+                    android:id="@+id/nav_fps"
+                    android:title="@string/menu_fps" />
+                <item
+                    android:id="@+id/nav_horror"
+                    android:title="@string/menu_horror" />
+                <item
+                    android:id="@+id/nav_management"
+                    android:title="@string/menu_management" />
+                <item
+                    android:id="@+id/nav_mmorpg"
+                    android:title="@string/menu_mmorpg" />
+                <item
+                    android:id="@+id/nav_racing"
+                    android:title="@string/menu_racing" />
+                <item
+                    android:id="@+id/nav_rpg"
+                    android:title="@string/menu_rpg" />
+                <item
+                    android:id="@+id/nav_sports"
+                    android:title="@string/menu_sports" />
+                <item
+                    android:id="@+id/nav_strategy"
+                    android:title="@string/menu_strategy" />
+            </menu>
+        </item>
+
     </group>
 </menu>

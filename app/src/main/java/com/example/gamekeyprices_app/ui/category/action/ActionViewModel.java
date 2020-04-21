@@ -1,16 +1,16 @@
-package com.example.gamekeyprices_app.ui.gallery;
+package com.example.gamekeyprices_app.ui.category.action;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ActionViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ActionViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is action fragment");
     }
 
     public LiveData<String> getText() {

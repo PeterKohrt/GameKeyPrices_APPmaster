@@ -1,4 +1,4 @@
-package com.example.gamekeyprices_app.ui.gallery;
+package com.example.gamekeyprices_app.ui.category.action;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.gamekeyprices_app.R;
 
-public class GalleryFragment extends Fragment {
+public class ActionFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private ActionViewModel actionViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        actionViewModel =
+                ViewModelProviders.of(this).get(ActionViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_action, container, false);
+        final TextView textView = root.findViewById(R.id.text_action);
+        actionViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
