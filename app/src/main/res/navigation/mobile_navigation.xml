@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_recent">
 
     <fragment
         android:id="@+id/nav_home"
@@ -17,14 +17,24 @@
     </fragment>
 
     <fragment
+        android:id="@+id/nav_action"
+        android:name="com.example.gamekeyprices_app.ui.category.action.ActionFragment"
+        android:label="@string/menu_action"
+        tools:layout="@layout/fragment_action">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_adventure"
+        android:name="com.example.gamekeyprices_app.ui.category.adventure.AdventureFragment"
+        android:label="@string/menu_adventure"
+        tools:layout="@layout/fragment_adventure">
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_recent"
         android:name="com.example.gamekeyprices_app.ui.recent.RecentFragment"
         android:label="@string/menu_recent"
         tools:layout="@layout/fragment_recent">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
     </fragment>
 
     <fragment
@@ -46,16 +56,4 @@
         android:name="com.example.gamekeyprices_app.ui.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.gamekeyprices_app.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.gamekeyprices_app.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
 </navigation>
