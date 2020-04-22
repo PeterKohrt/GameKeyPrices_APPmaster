@@ -1,16 +1,16 @@
-package com.example.gamekeyprices_app.ui.home;
+package com.example.gamekeyprices_app.ui.category.racing;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class RacingViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public RacingViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is Racing fragment");
     }
 
     public LiveData<String> getText() {

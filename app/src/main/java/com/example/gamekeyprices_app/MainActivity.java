@@ -1,6 +1,9 @@
 package com.example.gamekeyprices_app;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,12 +39,19 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        Menu menu = navigationView.getMenu();
+        MenuItem category = menu.findItem(R.id.nav_category);
+        SpannableString s = new SpannableString(category.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.MenuTitleStyle), 0, s.length(), 0);
+        category.setTitle(s);
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_favorites, R.id.nav_recent, R.id.nav_action, R.id.nav_adventure)
+                R.id.nav_favorites, R.id.nav_recent, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
+                R.id.nav_horror, R.id.nav_management, R.id.nav_mmorpg, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -50,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
