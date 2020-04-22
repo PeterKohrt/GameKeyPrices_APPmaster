@@ -6,54 +6,72 @@
     app:startDestination="@id/nav_recent">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.gamekeyprices_app.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_action"
-        android:name="com.example.gamekeyprices_app.ui.category.action.ActionFragment"
-        android:label="@string/menu_action"
-        tools:layout="@layout/fragment_action">
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_adventure"
-        android:name="com.example.gamekeyprices_app.ui.category.adventure.AdventureFragment"
-        android:label="@string/menu_adventure"
-        tools:layout="@layout/fragment_adventure">
-    </fragment>
-
-    <fragment
         android:id="@+id/nav_recent"
         android:name="com.example.gamekeyprices_app.ui.recent.RecentFragment"
         android:label="@string/menu_recent"
-        tools:layout="@layout/fragment_recent">
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_home_second"
-        android:name="com.example.gamekeyprices_app.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_recent" />
 
     <fragment
         android:id="@+id/nav_favorites"
         android:name="com.example.gamekeyprices_app.ui.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/nav_category"
+        android:name="com.example.gamekeyprices_app.ui.category.CategoryFragment"
+        android:label="@string/menu_category"
+        tools:layout="@layout/fragment_category" />
+
+    <fragment
+        android:id="@+id/nav_action"
+        android:name="com.example.gamekeyprices_app.ui.category.action.ActionFragment"
+        android:label="@string/menu_action"
+        tools:layout="@layout/fragment_action" />
+
+    <fragment
+        android:id="@+id/nav_adventure"
+        android:name="com.example.gamekeyprices_app.ui.category.adventure.AdventureFragment"
+        android:label="@string/menu_adventure"
+        tools:layout="@layout/fragment_adventure" />
+    <fragment
+        android:id="@+id/nav_fps"
+        android:name="com.example.gamekeyprices_app.ui.category.fps.FPSFragment"
+        android:label="@string/menu_fps"
+        tools:layout="@layout/fragment_fps" />
+    <fragment
+        android:id="@+id/nav_horror"
+        android:name="com.example.gamekeyprices_app.ui.category.horror.HorrorFragment"
+        android:label="@string/menu_horror"
+        tools:layout="@layout/fragment_horror" />
+    <fragment
+        android:id="@+id/nav_management"
+        android:name="com.example.gamekeyprices_app.ui.category.management.ManagementFragment"
+        android:label="@string/menu_management"
+        tools:layout="@layout/fragment_management" />
+    <fragment
+        android:id="@+id/nav_mmorpg"
+        android:name="com.example.gamekeyprices_app.ui.category.mmorpg.MMORPGFragment"
+        android:label="@string/menu_mmorpg"
+        tools:layout="@layout/fragment_mmorpg" />
+    <fragment
+        android:id="@+id/nav_racing"
+        android:name="com.example.gamekeyprices_app.ui.category.racing.RacingFragment"
+        android:label="@string/menu_racing"
+        tools:layout="@layout/fragment_racing" />
+    <fragment
+        android:id="@+id/nav_rpg"
+        android:name="com.example.gamekeyprices_app.ui.category.rpg.RPGFragment"
+        android:label="@string/menu_rpg"
+        tools:layout="@layout/fragment_rpg" />
+    <fragment
+        android:id="@+id/nav_sports"
+        android:name="com.example.gamekeyprices_app.ui.category.sports.SportsFragment"
+        android:label="@string/menu_sports"
+        tools:layout="@layout/fragment_sports" />
+    <fragment
+        android:id="@+id/nav_strategy"
+        android:name="com.example.gamekeyprices_app.ui.category.strategy.StrategyFragment"
+        android:label="@string/menu_strategy"
+        tools:layout="@layout/fragment_strategy" />
 </navigation>

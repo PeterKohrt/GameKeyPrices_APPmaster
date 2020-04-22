@@ -10,7 +10,7 @@ public class AdventureViewModel extends ViewModel {
 
     public AdventureViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is adventure fragment");
+        mText.setValue("This is Adventure fragment");
     }
 
     public LiveData<String> getText() {

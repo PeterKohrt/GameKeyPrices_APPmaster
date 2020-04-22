@@ -2,8 +2,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorBackgroundLightDark</item>
         <item name="colorPrimaryDark">@color/colorBackgroundDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
         <item name="icon">@color/colorWhite</item>
+        <item name="itemFillColor">@color/colorWhite</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -11,7 +11,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark"/>
+
+    <style name="MenuTitleStyle">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

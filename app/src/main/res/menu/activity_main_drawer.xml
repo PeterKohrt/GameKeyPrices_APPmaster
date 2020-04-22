@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
@@ -12,15 +13,10 @@
             android:id="@+id/nav_recent"
             android:icon="@drawable/ic_menu_recent"
             android:title="@string/menu_recent" />
-        <item
-            android:id="@+id/nav_home"
-            android:title="@string/menu_home"/>
 
         <item
-            android:color="@color/colorWhite"
-            android:title="@string/menu_category"
-            android:id="@+id/nav_category">
-
+            android:id="@+id/nav_category"
+            android:title="@string/menu_category">
             <menu>
                 <item
                     android:id="@+id/nav_action"
@@ -54,6 +50,5 @@
                     android:title="@string/menu_strategy" />
             </menu>
         </item>
-
     </group>
 </menu>
