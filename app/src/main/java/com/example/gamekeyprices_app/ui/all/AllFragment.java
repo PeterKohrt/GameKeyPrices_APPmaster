@@ -1,34 +1,40 @@
 package com.example.gamekeyprices_app.ui.all;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.recyclerview.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.gamekeyprices_app.R;
+import com.example.gamekeyprices_app.ui.item.ListItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllFragment extends Fragment {
 
-    public static AllFragment newInstance() {
-        return new AllFragment();
+
+    private AllViewModel allViewModel;
+    private List<ListItem> game_list;
+    private RecyclerView game_list_view;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        //SET VIEW
+        View view = inflater.inflate(R.layout.fragment_all, container, false);
+
+        // INITIALIZE LAYOUT
+        game_list = new ArrayList<>();
+        game_list_view = view.findViewById(R.id.fragment_all);
+
+        // Inflate the layout for this fragment
+        return view;
+                                                                             }
     }
-
-    private AllViewModel mViewModel;
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_all, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AllViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
-}

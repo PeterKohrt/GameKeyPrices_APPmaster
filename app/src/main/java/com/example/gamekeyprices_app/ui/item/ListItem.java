@@ -1,4 +1,4 @@
-package com.example.gamekeyprices_app;
+package com.example.gamekeyprices_app.ui.item;
 
 import android.media.Image;
 
