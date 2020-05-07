@@ -44,13 +44,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         Menu menu = navigationView.getMenu();
+        // changes color of menu title
         MenuItem category = menu.findItem(R.id.nav_category);
         SpannableString s = new SpannableString(category.getTitle());
         s.setSpan(new TextAppearanceSpan(this, R.style.MenuTitleStyle), 0, s.length(), 0);
         category.setTitle(s);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_favorites, R.id.nav_recent, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
+                R.id.nav_favorites, R.id.nav_recent, R.id.nav_all, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
                 R.id.nav_horror, R.id.nav_management, R.id.nav_mmorpg, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
                 .setDrawerLayout(drawer)
                 .build();

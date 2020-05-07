@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
+        android:id="@+id/nav_all"
+        android:name="com.example.gamekeyprices_app.ui.all.AllFragment"
+        android:label="@string/menu_all"
+        tools:layout="@layout/fragment_all" />
+
+    <fragment
         android:id="@+id/nav_category"
         android:name="com.example.gamekeyprices_app.ui.category.CategoryFragment"
         android:label="@string/menu_category"

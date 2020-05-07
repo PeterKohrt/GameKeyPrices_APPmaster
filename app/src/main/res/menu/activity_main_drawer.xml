@@ -15,6 +15,11 @@
             android:title="@string/menu_recent" />
 
         <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_view_headline_black_24dp"
+            android:title="@string/menu_all" />
+
+        <item
             android:id="@+id/nav_category"
             android:title="@string/menu_category">
             <menu>
