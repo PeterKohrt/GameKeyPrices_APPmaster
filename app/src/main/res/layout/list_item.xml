@@ -6,12 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.recent.RecentFragment">
 
+    <ViewAnimator
+        android:id="@+id/center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ViewAnimator
+        android:id="@+id/quater_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quater_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,8 +47,21 @@
 
             <ImageButton
                 android:id="@+id/game_image"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/card_view_center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ViewAnimator
+                android:id="@+id/card_view_center"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,12 +77,25 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/game_title" />
 
+            <ViewAnimator
+                android:id="@+id/split_low_now"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/cheapest_shop_now"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toBottomOf="@+id/game_title"
+                app:layout_constraintVertical_bias="1.0" />
+
             <TextView
                 android:id="@+id/historic_low"
-                android:layout_width="114dp"
+                android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:gravity="center"
                 android:text="@string/historic_low"
+                app:layout_constraintEnd_toStartOf="@+id/split_low_now"
                 app:layout_constraintStart_toEndOf="@+id/game_image"
                 app:layout_constraintTop_toBottomOf="@+id/game_title" />
 
@@ -60,10 +111,11 @@
 
             <TextView
                 android:id="@+id/historic_low_value"
-                android:layout_width="114dp"
+                android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:gravity="center"
                 android:text="@string/historic_low_value"
+                app:layout_constraintEnd_toStartOf="@+id/split_low_now"
                 app:layout_constraintStart_toEndOf="@+id/game_image"
                 app:layout_constraintTop_toBottomOf="@+id/historic_low" />
 
