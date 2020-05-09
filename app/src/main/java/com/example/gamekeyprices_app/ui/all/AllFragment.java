@@ -7,13 +7,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.gamekeyprices_app.R;
-import com.example.gamekeyprices_app.ui.item.ListItem;
+import com.example.gamekeyprices_app.ListItem;
 
 import java.util.ArrayList;
 import java.util.List;

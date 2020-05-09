@@ -36,7 +36,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/quater_horizontal"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/center_center_quater_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -121,7 +122,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/historic_low" />
 
             <TextView
-                android:id="@+id/actual_price2"
+                android:id="@+id/now_low_value"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:gravity="center"
