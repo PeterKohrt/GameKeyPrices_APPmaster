@@ -48,6 +48,26 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
+        // BIND GAME_TITLE
+        String game_title_data = all_list.get(position).getGame_title();
+        holder.setGameTitle(game_title_data);
+
+        // BIND PRICE_HISTORIC_LOW
+        String price_historic_now = all_list.get(position).getPrice_historic_low();
+        holder.setPriceHistoricLow(price_historic_now);
+
+        // BIND PRICE_NOW_LOW
+        String price_now_low = all_list.get(position).getPrice_now_low();
+        holder.setPriceNowLow(price_now_low);
+
+        // BIND CHEAPEST_SHOP_NOW
+        String cheapest_shop_now = all_list.get(position).getCheapest_shop_now();
+        holder.setCheapestShopNow(cheapest_shop_now);
+
+        // BIND GAME_IMAGE
+        String game_image_data = all_list.get(position).getImage_url();
+        holder.setGameImage(game_image_data);
+
     }
 
     // METHOD for VIEWHOLDER
