@@ -2,19 +2,11 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config>
-        <device id="pixel_3_xl" />
-      </config>
+      <config />
     </shared>
   </component>
-  <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="70a35b47-f49d-47e2-8ae2-4ca25513704a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/list_item_placeholder.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" afterDir="false" />
-    </list>
+    <list default="true" id="f82f6e74-db45-47f4-a493-f4752af43a3e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,49 +22,33 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view>
-          <tree_state>
-            <expand />
-            <select />
-          </tree_state>
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
-        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1akypUfGxUvH9XkecOZTNLsAr9q" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1bjAdZc7rFHi8kwkzbaFHtIZEou" />
   <component name="PropertiesComponent">
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Nexus_5X_API_29_x86" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-04-23T16:39:17.817Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-11T00:11:36.497Z" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.example.gamekeyprices_app" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP\app\src\main\java\com\example\gamekeyprices_app\ui\favorites" />
-      <recent name="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP\app\src\main\java\com\example\gamekeyprices_app\ui" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP\app\src\main\res\drawable" />
-      <recent name="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP\app\src\main\res\drawable-v24" />
-      <recent name="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP\app\src\main\res\mipmap-anydpi-v26" />
-    </key>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -151,11 +127,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="70a35b47-f49d-47e2-8ae2-4ca25513704a" name="Default Changelist" comment="" />
-      <created>1587294069024</created>
+      <changelist id="f82f6e74-db45-47f4-a493-f4752af43a3e" name="Default Changelist" comment="" />
+      <created>1589135216507</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1587294069024</updated>
+      <updated>1589135216507</updated>
     </task>
     <servers />
   </component>
