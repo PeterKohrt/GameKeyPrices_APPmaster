@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.recent.RecentFragment">
+
+    <ViewAnimator
+        android:id="@+id/center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ViewAnimator
+        android:id="@+id/quater_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/quater_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/game_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="-2dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginEnd="-2dp"
+                android:layout_marginBottom="-2dp"
+                android:adjustViewBounds="false"
+                android:fadingEdge="horizontal|vertical"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/card_view_center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/list_item_placeholder" />
+
+            <ViewAnimator
+                android:id="@+id/card_view_center"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/game_title"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/game_title" />
+
+            <ViewAnimator
+                android:id="@+id/split_low_now"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/cheapest_shop_now"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toBottomOf="@+id/game_title"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/historic_low"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="@string/historic_low"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toStartOf="@+id/split_low_now"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toBottomOf="@+id/game_title" />
+
+            <TextView
+                android:id="@+id/actual_price"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="@string/actual_price"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/historic_low"
+                app:layout_constraintTop_toBottomOf="@+id/game_title" />
+
+            <TextView
+                android:id="@+id/historic_low_value"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="@string/historic_low_value"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toStartOf="@+id/split_low_now"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toBottomOf="@+id/historic_low" />
+
+            <TextView
+                android:id="@+id/now_low_value"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:gravity="center"
+                android:text="@string/actual_price_value"
+                android:textColor="@color/colorBlack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/historic_low_value"
+                app:layout_constraintTop_toBottomOf="@+id/actual_price" />
+
+            <TextView
+                android:id="@+id/cheapest_shop_now"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/cheapest_shop_now"
+                app:layout_constraintBottom_toBottomOf="@+id/game_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/historic_low_value"
+                app:layout_constraintTop_toBottomOf="@+id/historic_low_value" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,12 +28,6 @@ public class AllFragment extends Fragment {
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
-   /* // DOCUMENT SNAPSHOT for PAGE
-    private DocumentSnapshot lastVisible;
-    private boolean isFirstPageFirstLoad = true;
-    private boolean queryEnable;
-   */
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //SET VIEW
@@ -48,91 +42,18 @@ public class AllFragment extends Fragment {
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
 
+
+        final ListItem testItem = new ListItem("https://i.kym-cdn.com/photos/images/newsfeed/000/764/965/47a.jpg", "Spiele Titel", "1.0", "0.5", "steam");
+        final ListItem testItem2 = new ListItem("https://steamcdn-a.akamaihd.net/steam/apps/236850/header.jpg", "Spiele Titel 2", "1.0", "0.5", "steam");
+
+
+        //public ListItem(String image_url, String game_title, String price_historic_low, String price_now_low, String cheapest_shop_now)
+
+        game_list.add(testItem2);
+        game_list.add(testItem);
+
         // Inflate the layout for this fragment
         return view;
                                                                              }
-    // METHOD FOR LOADING QUERY AFTER onCreate
-   /* private void loadFirstQuery() {
-        if (queryEnable) {
-            if (firebaseAuth.getCurrentUser() != null) {
-                // FIREBASE QUERY for ORDER BLOG ENTRIES
-                Query firstQuery = firebaseFirestore
-                        .collection("Posts")
-                        .orderBy("timestamp", Query.Direction.DESCENDING)
-                        .limit(5);
-
-
-                firstQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if (e == null) {
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                lastVisible = queryDocumentSnapshots.getDocuments().get(queryDocumentSnapshots.size() - 1);
-
-
-                                // CHECK FOR DOCUMENT CHANGE
-                                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
-                                    if (doc.getType() == DocumentChange.Type.ADDED) {
-
-                                        String blogPostId = doc.getDocument().getId();
-                                        BlogPost blogPost = doc.getDocument().toObject(BlogPost.class);
-
-                                        blog_list.add(blogPost);
-
-                                        blogRecyclerAdapter.notifyDataSetChanged();
-
-                                    }
-                                }
-                                isFirstPageFirstLoad = false;
-
-                            }
-                        }
-                    }
-
-                });
-
-            }
-        }
-    }
-
-    // PAGINATION for QUERIES
-    public void loadMorePost() {
-        if(queryEnable) {
-            if(firebaseAuth.getCurrentUser() != null) {
-
-                Query nextQuery = firebaseFirestore
-                        .collection("Posts")
-                        .orderBy("timestamp", Query.Direction.DESCENDING)
-                        .startAfter(lastVisible)
-                        .limit(5);
-
-                nextQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                        if(e == null) {
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                lastVisible = queryDocumentSnapshots.getDocuments().get(queryDocumentSnapshots.size() - 1);
-
-
-                                // CHECK FOR DOCUMENT CHANGE
-                                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
-                                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                                        BlogPost blogPost = doc.getDocument().toObject(BlogPost.class);
-                                        blog_list.add(blogPost);
-                                        blogRecyclerAdapter.notifyDataSetChanged();
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                });
-            }
-        }
-    }
-   */
 
     }
