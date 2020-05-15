@@ -27,11 +27,11 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //SET VIEW
-        View view = inflater.inflate(R.layout.fragment_all, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         // INITIALIZE LAYOUT
         game_list = new ArrayList<>();
-        game_list_view = view.findViewById(R.id.fragment_all);
+        game_list_view = view.findViewById(R.id.fragment_deals);
 
         // INITIALIZE BlogRecyclerAdapter
        // allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list);
