@@ -3,19 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_recent">
+    app:startDestination="@id/nav_deals">
 
     <fragment
-        android:id="@+id/nav_recent"
-        android:name="com.example.gamekeyprices_app.ui.recent.RecentFragment"
-        android:label="@string/menu_recent"
-        tools:layout="@layout/fragment_recent" />
+        android:id="@+id/nav_deals"
+        android:name="com.example.gamekeyprices_app.ui.deals.DealsFragment"
+        android:label="@string/menu_deals"
+        tools:layout="@layout/fragment_deals" />
 
     <fragment
         android:id="@+id/nav_favorites"
         android:name="com.example.gamekeyprices_app.ui.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.gamekeyprices_app.ui.search.SearchFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/nav_all"

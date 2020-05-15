@@ -10,9 +10,13 @@
             android:icon="@drawable/ic_menu_favorites"
             android:title="@string/menu_favorites" />
         <item
-            android:id="@+id/nav_recent"
+            android:id="@+id/nav_deals"
             android:icon="@drawable/ic_menu_recent"
-            android:title="@string/menu_recent" />
+            android:title="@string/menu_deals" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="@string/menu_search" />
 
         <item
             android:id="@+id/nav_all"

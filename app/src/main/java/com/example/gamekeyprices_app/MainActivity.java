@@ -3,21 +3,18 @@ package com.example.gamekeyprices_app;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         category.setTitle(s);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_favorites, R.id.nav_recent, R.id.nav_all, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
+                R.id.nav_favorites, R.id.nav_deals, R.id.nav_search, R.id.nav_all, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
                 R.id.nav_horror, R.id.nav_management, R.id.nav_mmorpg, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
                 .setDrawerLayout(drawer)
                 .build();
