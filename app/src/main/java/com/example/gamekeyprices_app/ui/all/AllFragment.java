@@ -30,7 +30,6 @@ import java.util.List;
 
 public class AllFragment extends Fragment {
 
-
     private AllViewModel allViewModel;
     private List<ListItem> game_list;
     private RecyclerView game_list_view;
@@ -71,7 +70,7 @@ public class AllFragment extends Fragment {
                             JSONObject res_data = new JSONObject(obj.get("data").toString());
                             JSONObject game = new JSONObject(res_data.get("europauniversalisiv").toString());
 
-                            game_list.add(new ListItem("https://i.kym-cdn.com/photos/images/newsfeed/000/764/965/47a.jpg", game.toString(), "", "", ""));
+                            game_list.add(new ListItem("https://steamcdn-a.akamaihd.net/steam/apps/255163/header.jpg", game.toString(), "", "", ""));
 
 
                         } catch (JSONException e) {

@@ -1,16 +1,16 @@
-package com.example.gamekeyprices_app.ui.recent;
+package com.example.gamekeyprices_app.ui.search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class RecentViewModel extends ViewModel {
+public class SearchViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public RecentViewModel() {
+    public SearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is recent fragment");
+        mText.setValue("This is search fragment");
     }
 
     public LiveData<String> getText() {
