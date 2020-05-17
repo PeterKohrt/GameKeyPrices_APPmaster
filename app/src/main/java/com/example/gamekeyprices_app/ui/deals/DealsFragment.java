@@ -93,12 +93,12 @@ public class DealsFragment extends Fragment {
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old");
                                 String price_new = dealObject.getString("price_new");
-                                String shop = "";
+                                String shop = dealObject.getJSONObject("shop").getString("name");
                                 String cut = dealObject.getString("price_cut");
                                 String expire = dealObject.getString("expiry");
 
                                 deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, expire));
-                                
+
                             }
 
                             //creating custom adapter object
