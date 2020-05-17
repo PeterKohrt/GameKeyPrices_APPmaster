@@ -76,22 +76,29 @@ public class DealsFragment extends Fragment {
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i);
 
-                                //DealsItem dealsItem = new DealsItem("","","","","","","")
-                                DealsItem dealsItem = new DealsItem("https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png", dealObject.getString("title"), dealObject.getString("price_old"), dealObject.getString("price_new"), "", dealObject.getString("price_cut"),dealObject.getString("expiry"));
+                                //DealsItem dealsItem = new DealsItem("","","","","","","");
+                               // DealsItem dealsItem = new DealsItem("https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png", dealObject.getString("title"), dealObject.getString("price_old"), dealObject.getString("price_new"), "", dealObject.getString("price_cut"),dealObject.getString("expiry"));
 
-                                deals_list.add(dealsItem);
+                              //  deals_list.add(dealsItem);
 
-                            /*  String game_image_url = "";
+                                /* String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png";
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old");
                                 String price_new = dealObject.getString("price_new");
                                 String shop = "";
                                 String cut = dealObject.getString("cut");
-                                String expire = dealObject.getString("expire");
+                                String expire = dealObject.getString("expiry"); */
 
-                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, expire)); */
+                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png";
+                                String gameTitle = dealObject.getString("title");
+                                String price_old = dealObject.getString("price_old");
+                                String price_new = dealObject.getString("price_new");
+                                String shop = "";
+                                String cut = dealObject.getString("price_cut");
+                                String expire = dealObject.getString("expiry");
 
-
+                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, expire));
+                                
                             }
 
                             //creating custom adapter object
