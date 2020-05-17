@@ -26,6 +26,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,28 +80,32 @@ public class DealsFragment extends Fragment {
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i);
 
-                                //DealsItem dealsItem = new DealsItem("","","","","","","");
-                               // DealsItem dealsItem = new DealsItem("https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png", dealObject.getString("title"), dealObject.getString("price_old"), dealObject.getString("price_new"), "", dealObject.getString("price_cut"),dealObject.getString("expiry"));
-
-                              //  deals_list.add(dealsItem);
-
-                                /* String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png";
-                                String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old");
-                                String price_new = dealObject.getString("price_new");
-                                String shop = "";
-                                String cut = dealObject.getString("cut");
-                                String expire = dealObject.getString("expiry"); */
-
                                 String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png";
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old");
                                 String price_new = dealObject.getString("price_new");
-                                String shop = dealObject.getJSONObject("shop").getString("name");
-                                String cut = dealObject.getString("price_cut");
-                                String expire = dealObject.getString("expiry");
 
-                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, expire));
+                                String shop = dealObject.getJSONObject("shop").getString("name");
+
+                                String cut = dealObject.getString("price_cut");
+                                
+                                String expire_string =  dealObject.getString("expiry");
+                                String output = "";
+
+                                if (expire_string == "null"){
+                                    output ="null";
+                                }
+
+                                else {
+                                    Long c = Long.parseLong(expire_string);
+                                    Instant instant = Instant.ofEpochSecond(c);
+                                    ZoneId z = ZoneId.of("Europe/Berlin");
+                                    ZonedDateTime zdt = instant.atZone(z);
+                                    LocalDate ld = zdt.toLocalDate();
+                                    output = ld.toString();
+                                }
+
+                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output));
 
                             }
 
