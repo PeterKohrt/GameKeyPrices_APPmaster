@@ -82,7 +82,7 @@ public class DealsFragment extends Fragment {
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
-                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO URI BUILDER
+                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO GAME-INFO REQUEST 4 PIC
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
