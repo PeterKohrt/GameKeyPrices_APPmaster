@@ -84,9 +84,9 @@ public class DealsFragment extends Fragment {
 
                                 String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO URI BUILDER
                                 String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old");
-                                String price_new = dealObject.getString("price_new");
-                                String cut = dealObject.getString("price_cut");
+                                String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
+                                String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
+                                String cut = dealObject.getString("price_cut")+" %";
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
