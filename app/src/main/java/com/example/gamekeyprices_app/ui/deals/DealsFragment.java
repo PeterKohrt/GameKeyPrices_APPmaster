@@ -30,6 +30,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,12 +90,12 @@ public class DealsFragment extends Fragment {
                                 String shop = dealObject.getJSONObject("shop").getString("name");
 
                                 String cut = dealObject.getString("price_cut");
-                                
+
                                 String expire_string =  dealObject.getString("expiry");
-                                String output = "";
+                                String output_expiry = "";
 
                                 if (expire_string == "null"){
-                                    output ="null";
+                                    output_expiry ="null";
                                 }
 
                                 else {
@@ -102,10 +104,10 @@ public class DealsFragment extends Fragment {
                                     ZoneId z = ZoneId.of("Europe/Berlin");
                                     ZonedDateTime zdt = instant.atZone(z);
                                     LocalDate ld = zdt.toLocalDate();
-                                    output = ld.toString();
+                                    output_expiry = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
                                 }
 
-                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output));
+                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output_expiry));
 
                             }
 
