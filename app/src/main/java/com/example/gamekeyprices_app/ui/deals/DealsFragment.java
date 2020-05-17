@@ -54,8 +54,7 @@ public class DealsFragment extends Fragment {
         deals_list = new ArrayList<>();
         deals_list_view = view.findViewById(R.id.fragment_deals);
 
-        // INITIALIZE BlogRecyclerAdapter
-
+        // INITIALIZE RecyclerAdapter
         dealsFragmentRecyclerAdapter = new DealsFragmentRecyclerAdapter(deals_list, getContext());
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
@@ -67,6 +66,7 @@ public class DealsFragment extends Fragment {
     }
 
     private void loadQuery() {
+        // TODO URI BUILDER
         String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -74,36 +74,40 @@ public class DealsFragment extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject obj = new JSONObject(response);
+                            JSONObject obj = new JSONObject(response); //Complete JSONObject
 
-                            JSONObject obj_obj = obj.getJSONObject("data");
-                            JSONArray gameDealArray = obj_obj.getJSONArray("list");
+                            JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+                            JSONArray gameDealArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
 
                             for (int i = 0; i < gameDealArray.length(); i++) {
-                                JSONObject dealObject = gameDealArray.getJSONObject(i);
+                                JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
-                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png";
+                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO URI BUILDER
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old");
                                 String price_new = dealObject.getString("price_new");
-
-                                String shop = dealObject.getJSONObject("shop").getString("name");
-
                                 String cut = dealObject.getString("price_cut");
 
+                                // shop is an separate object in list-array-object -> getJSONObject("shop) ...
+                                String shop = dealObject.getJSONObject("shop").getString("name");
+
+                                //date is unix timestamp -> format in date-only - if/else cause respond can be "null"
                                 String expire_string =  dealObject.getString("expiry");
                                 String output_expiry = "";
 
+                                //expiry-JSON = "null"
                                 if (expire_string == "null"){
-                                    output_expiry ="null";
+                                    output_expiry ="n.a.";
                                 }
 
+                                //expiry-JSON = "unix-timestamp"
                                 else {
                                     Long c = Long.parseLong(expire_string);
                                     Instant instant = Instant.ofEpochSecond(c);
                                     ZoneId z = ZoneId.of("Europe/Berlin");
                                     ZonedDateTime zdt = instant.atZone(z);
                                     LocalDate ld = zdt.toLocalDate();
+                                    //set Date Format-Output
                                     output_expiry = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
                                 }
 
