@@ -51,30 +51,29 @@ public class FPSFragment extends Fragment {
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
 
-
-        //define STRING for URL GET REQUEST by Plain
-        String g1 = "destinyii"+"%2C";
-        String g2 = "counterstrikeglobaloffensive"+"%2C";
-        String g3 = "tomclancysrainbowsixsiege"+"%2C";
-        String g4 = "battlefieldi"+"%2C";
-        String g5 = "farcryv"+"%2C";
-        String g6 = "overwatch"+"%2C";
-        String g7 = "divisionii"+"%2C";
-        String g8 = "rageii"+"%2C";
-        String g9 = "callofdutyblackopsiv"+"%2C";
-        String g10 = "battlefieldv";
-
-        //Transfer as one string
-        String glist = ""+g1+g2+g3+g4+g5+g6+g7+g8+g9+g10;
-
-        loadQuery(glist);
+        loadQuery();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void loadQuery(String glist) {
-        // TODO URI BUILDER
+    private void loadQuery() {
+
+        //define STRING for URL GET REQUEST by Plain
+        final String g1 = "halflifealyx";
+        final String g2 = "dyinglight";
+        final String g3 = "deeprockgalactic";
+        final String g4 = "doom";
+        final String g5 = "blackmesa";
+        final String g6 = "ravenfield";
+        final String g7 = "bloodandbacon";
+        final String g8 = "residentevilviibiohazard";
+        final String g9 = "insurgency";
+        final String g10 = "halomasterchiefcollection";
+
+        //Transfer as one string
+        String glist = ""+g1+"%2C"+g2+"%2C"+g3+"%2C"+g4+"%2C"+g5+"%2C"+g6+"%2C"+g7+"%2C"+g8+"%2C"+g9+"%2C"+g10;
+
         String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&plains="+glist; //GET REQUEST for 10 Preselected Games
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -86,20 +85,10 @@ public class FPSFragment extends Fragment {
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
 
                             //Helper Array to get through JSON OBJECTS
-                            String[] fpsList = {
-                                    "destinyii",                            //https://steamcdn-a.akamaihd.net/steam/apps/1085660/header.jpg
-                                    "counterstrikeglobaloffensive",         //https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg
-                                    "tomclancysrainbowsixsiege",            //https://steamcdn-a.akamaihd.net/steam/apps/359550/header.jpg
-                                    "battlefieldi",
-                                    "farcryv",                              //https://steamcdn-a.akamaihd.net/steam/apps/552520/header.jpg
-                                    "overwatch",
-                                    "divisionii",
-                                    "rageii",                               //https://steamcdn-a.akamaihd.net/steam/apps/548570/header.jpg?t=1582901756
-                                    "callofdutyblackopsiv",
-                                    "battlefieldv"};
+                            String[] fpsList = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
 
                             //Helper Array to get ID for Game-Image-URL
-                            String[] picid = {"1085660","730","359550","","552520","","","548570","",""};
+                            String[] picid = {"546560","239140","548430","379720","362890","636480","434570","418370","222880","976730"};
 
                             for (int i = 0; i<fpsList.length; i++) {
 

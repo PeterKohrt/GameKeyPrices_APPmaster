@@ -62,7 +62,7 @@ public class SearchFragment extends Fragment {
         //   convert = mSearchView.getQuery().toString();
 
         //TODO IMPLEMENT SEARCH 2 PLAIN
-        String request_plain = "Wreckfest";
+        String request_plain = "odyssey";
 
         loadQuery(request_plain);
 

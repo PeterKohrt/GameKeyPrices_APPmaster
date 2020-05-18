@@ -11,13 +11,14 @@
     <string name="menu_deals">Deals</string>
     <string name="menu_search">Search</string>
     <string name="menu_all">All</string>
-    <string name="menu_category">Category</string>
+
+    <string name="menu_category">Spotlight</string>
     <string name="menu_action">Action</string>
     <string name="menu_adventure">Adventure</string>
     <string name="menu_fps">FPS</string>
     <string name="menu_horror">Horror</string>
     <string name="menu_management">Management</string>
-    <string name="menu_mmorpg">MMORPG</string>
+    <string name="menu_mmo">MMO</string>
     <string name="menu_racing">Racing</string>
     <string name="menu_rpg">RPG</string>
     <string name="menu_sports">Sports</string>

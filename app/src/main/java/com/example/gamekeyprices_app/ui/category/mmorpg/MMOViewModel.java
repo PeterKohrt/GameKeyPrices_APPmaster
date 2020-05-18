@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MMORPGViewModel extends ViewModel {
+public class MMOViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public MMORPGViewModel() {
+    public MMOViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is MMORPG fragment");
     }

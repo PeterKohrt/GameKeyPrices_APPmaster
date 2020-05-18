@@ -32,8 +32,7 @@
     <fragment
         android:id="@+id/nav_category"
         android:name="com.example.gamekeyprices_app.ui.category.CategoryFragment"
-        android:label="@string/menu_category"
-        tools:layout="@layout/fragment_category" />
+        android:label="@string/menu_category" />
 
     <fragment
         android:id="@+id/nav_action"
@@ -62,10 +61,10 @@
         android:label="@string/menu_management"
         tools:layout="@layout/fragment_management" />
     <fragment
-        android:id="@+id/nav_mmorpg"
-        android:name="com.example.gamekeyprices_app.ui.category.mmorpg.MMORPGFragment"
-        android:label="@string/menu_mmorpg"
-        tools:layout="@layout/fragment_mmorpg" />
+        android:id="@+id/nav_mmo"
+        android:name="com.example.gamekeyprices_app.ui.category.mmorpg.MMOFragment"
+        android:label="@string/menu_mmo"
+        tools:layout="@layout/fragment_mmo" />
     <fragment
         android:id="@+id/nav_racing"
         android:name="com.example.gamekeyprices_app.ui.category.racing.RacingFragment"

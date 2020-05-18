@@ -99,7 +99,6 @@ public class DealsFragment extends Fragment {
                                 if (expire_string == "null"){
                                     output_expiry ="n.a.";
                                 }
-
                                 //expiry-JSON = "unix-timestamp"
                                 else {
                                     Long c = Long.parseLong(expire_string);
