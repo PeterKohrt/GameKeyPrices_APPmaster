@@ -47,7 +47,7 @@ public class AllFragment extends Fragment {
         game_list_view = view.findViewById(R.id.fragment_all);
 
         // INITIALIZE BlogRecyclerAdapter
-        allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list);
+        allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list, getContext());
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
 

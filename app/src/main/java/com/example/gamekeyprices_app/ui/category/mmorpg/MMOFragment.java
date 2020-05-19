@@ -1,4 +1,4 @@
-package com.example.gamekeyprices_app.ui.category.horror;
+package com.example.gamekeyprices_app.ui.category.mmorpg;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorrorFragment extends Fragment {
+public class MMOFragment extends Fragment {
 
     private AllViewModel allViewModel;
     private List<ListItem> game_list;
@@ -40,11 +40,11 @@ public class HorrorFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_horror, container, false);
+        View view=inflater.inflate(R.layout.fragment_mmo, container, false);
 
         // INITIALIZE LAYOUT
         game_list = new ArrayList<>();
-        game_list_view = view.findViewById(R.id.horror_recycler);
+        game_list_view = view.findViewById(R.id.mmo_recycler);
 
         // INITIALIZE RecyclerAdapter
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list, getContext());
@@ -60,17 +60,18 @@ public class HorrorFragment extends Fragment {
     private void loadQuery() {
 
         //define STRING for URL GET REQUEST by Plain
-        final String g1 = "residenteviliii";
-        final String g2 = "inside";
-        final String g3 = "visage";
-        final String g4 = "littlenightmares";
-        final String g5 = "storiesuntold";
-        final String g6 = "outlastii";
-        final String g7 = "observer";
-        final String g8 = "preyii0ivii";
-        final String g9 = "blackoutclub";
-        final String g10 = "deadbydaylight";
+        final String g1 = "shellshocklive";
+        final String g2 = "temtem";
+        final String g3= "towerunite";
+        final String g4 = "squad";
+        final String g5 = "dragonballxenoverseii";
+        final String g6 = "risingstormiivietnam";
+        final String g7 = "isle";
+        final String g8 = "elderscrollsonlinestandardedition";
+        final String g9 = "foxhole";
+        final String g10 = "arksurvivalevolved";
 
+        //Transfer as one string
         String glist = ""+g1+"%2C"+g2+"%2C"+g3+"%2C"+g4+"%2C"+g5+"%2C"+g6+"%2C"+g7+"%2C"+g8+"%2C"+g9+"%2C"+g10;
 
         String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&plains="+glist; //GET REQUEST for 10 Preselected Games
@@ -87,8 +88,8 @@ public class HorrorFragment extends Fragment {
                             String[] list = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
 
                             //Helper Array to get ID for Game-Image-URL
-                            String[] picid = {"952060","304430","594330","424840","558420","414700","514900","480490","599080","381210"};
-                            String[] title = {"RESIDENT EVIL 3","INSIDE","Visage","Little Nightmares","Stories Untold","Outlast 2","Observer","Prey (2017)","The Blackout Club","Dead by Daylight"};
+                            String[] picid = {"326460","745920","394690","393380","454650","418460","376210","306130","505460","346110"};
+                            String[] title = {"ShellShock Live","Temtem","Tower Unite","Squad","DRAGON BALL XENOVERSE 2","Rising Storm 2: Vietnam","The Isle","The Elder Scrolls Online - Standard Edition","Foxhole","ARK: Survival Evolved"};
 
                             for (int i = 0; i<list.length; i++) {
 

@@ -16,6 +16,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
+// API_KEY 0dfaaa8b017e516c145a7834bc386864fcbd06f5
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -27,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -42,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_favorites, R.id.nav_deals, R.id.nav_search, R.id.nav_all, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
-                R.id.nav_horror, R.id.nav_management, R.id.nav_mmorpg, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
+                R.id.nav_horror, R.id.nav_management, R.id.nav_mmo, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override

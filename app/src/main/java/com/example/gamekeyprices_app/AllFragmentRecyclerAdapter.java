@@ -19,8 +19,10 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
 
     public List <ListItem> all_list;
     public Context context;
+    public Context mCtx;
 
-    public AllFragmentRecyclerAdapter(List<ListItem> all_list){
+    public AllFragmentRecyclerAdapter(List<ListItem> all_list, Context mCtx){
+        this.mCtx = mCtx;
         this.all_list = all_list;
 
     }

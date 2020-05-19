@@ -6,8 +6,7 @@ public class DealsItem {
     public DealsItem(){}
 
     // CONSTRUCTORS
-    public DealsItem(String image_url, String game_title, String price_old, String price_new, String shop, String cut,
-                      String expire) {
+    public DealsItem(String image_url, String game_title, String price_old, String price_new, String shop, String cut, String expire) {
         this.image_url = image_url;
         this.game_title = game_title;
         this.price_old = price_old;

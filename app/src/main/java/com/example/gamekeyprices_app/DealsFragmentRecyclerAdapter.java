@@ -19,8 +19,10 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
 
     public List <DealsItem> deals_list;
     public Context context;
+    public Context mCtx;
 
-    public DealsFragmentRecyclerAdapter(List<DealsItem> deals_list){
+    public DealsFragmentRecyclerAdapter(List<DealsItem> deals_list, Context mCtx){
+        this.mCtx = mCtx;
         this.deals_list = deals_list;
 
     }
