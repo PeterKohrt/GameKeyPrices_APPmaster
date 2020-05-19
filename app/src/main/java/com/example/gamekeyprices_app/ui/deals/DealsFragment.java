@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gamekeyprices_app.DealsFragmentRecyclerAdapter;
 import com.example.gamekeyprices_app.DealsItem;
+import com.example.gamekeyprices_app.MainActivity;
 import com.example.gamekeyprices_app.R;
 
 import org.json.JSONArray;
@@ -36,6 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DealsFragment extends Fragment {
+
+    public MainActivity mCountry;
+    public MainActivity mRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
@@ -58,6 +62,17 @@ public class DealsFragment extends Fragment {
         dealsFragmentRecyclerAdapter = new DealsFragmentRecyclerAdapter(deals_list, getContext());
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
+
+        mCountry = (MainActivity) getActivity();
+        String get_mCountryFromMain = mCountry.country;
+        String country = "&country="+get_mCountryFromMain;
+
+        mRegion = (MainActivity) getActivity();
+        String get_mRegionFromMain = mRegion.region;
+        String region = "&region"+get_mRegionFromMain;
+
+        Toast.makeText(getActivity(), country, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), region, Toast.LENGTH_LONG).show();
 
         loadQuery();
 

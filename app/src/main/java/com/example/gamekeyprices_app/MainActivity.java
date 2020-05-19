@@ -1,29 +1,57 @@
 package com.example.gamekeyprices_app;
 
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.navigation.NavigationView;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 // API_KEY 0dfaaa8b017e516c145a7834bc386864fcbd06f5
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
+    private double longitude;
+    private double latitude;
+    public String country;
+    public String region;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        check_permissions();
+        getCurrentLocation();
+        getCurrentLocation();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -48,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
+        
     }
 
     @Override
@@ -62,5 +90,73 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    // CHECK LOCATION PERMISSIONS
+    private void check_permissions() {
+
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String [] {ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
+        }
+        else{
+            getCurrentLocation();
+        }
+
+    }
+    // EVALUATE PERMISSION REQUEST RESULTS
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length >0)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                Toast.makeText(this, "Berechtigungen nicht erteilt", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+    }
+    // GET CURRENT CITY AND COUNTRY
+    private void getCurrentLocation() {
+
+        final LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(30000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                .requestLocationUpdates(locationRequest,new LocationCallback(){
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        super.onLocationResult(locationResult);
+                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                                .removeLocationUpdates(this);
+                        if(locationResult != null && locationResult.getLocations().size() > 0 ){
+                            int latestLocationIndex = locationResult.getLocations().size() -1;
+                            latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                            longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
+
+                            // GET CITY AND COUNTRY NAME
+
+                            try {
+                                Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                                country = addresses.get(0).getLocality();
+                                region = addresses.get(0).getCountryName();
+
+                            }
+                            catch (IOException e){
+                                e.printStackTrace();
+                                Toast.makeText(MainActivity.this, "Fehler: " + e, Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    }
+                }, Looper.getMainLooper());
+
     }
 }

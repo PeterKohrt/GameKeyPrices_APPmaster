@@ -88,7 +88,7 @@ public class ActionFragment extends Fragment {
 
                             //Helper Array to get ID for Game-Image-URL
                             String[] picid = {"524220","582010","779340","629760","594650","409720","870780","1097840","774361","460930"};
-                            String[] title = {"NieR: Automata","Monster Hunter: World","Total War: Three Kingdoms","Mordhau","Hunt: Showdown","BioShock 2 Remastered","Control","Gears 5","Blasphemous","Tom Clancy&apos;s Ghost Recon Wildlands"};
+                            String[] title = {"NieR: Automata","Monster Hunter: World","Total War: Three Kingdoms","Mordhau","Hunt: Showdown","BioShock 2 Remastered","Control","Gears 5","Blasphemous","Tom Clancy´s Ghost Recon Wildlands"};
 
                             for (int i = 0; i<list.length; i++) {
 
