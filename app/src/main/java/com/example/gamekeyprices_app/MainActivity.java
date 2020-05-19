@@ -21,7 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    public CharSequence query = "fdsfsd sdf sdf";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

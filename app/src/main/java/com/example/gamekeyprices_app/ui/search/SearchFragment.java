@@ -37,12 +37,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView search_list_view;
     private SearchView search_View;
 
-    // Example for transferring var from activity to class
-    // public MainActivity mQuery;
-
-  //  private RecyclerView mListView;
-  //  private String convert;
-  //  private SearchView mSearchView;
+    private String mSearchText;
 
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
@@ -53,33 +48,35 @@ public class SearchFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_search, container, false);
         // INITIALIZE LAYOUT
         search_list = new ArrayList<>();
+        search_View = view.findViewById(R.id.searchView);
         search_list_view = view.findViewById(R.id.rView);
-        search_View =view.findViewById(R.id.searchView);
 
         // INITIALIZE RecyclerAdapter
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(search_list, getContext());
         search_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         search_list_view.setAdapter(allFragmentRecyclerAdapter);
 
-        // Example for transferring var from activity to class
-  /*    mQuery = (MainActivity) getActivity();
-        CharSequence getQueryFromMain = mQuery.query;
-        String request_plain = getQueryFromMain.toString(); */
+        // On Query Text Listener -> ON Text Submit is Query loaded
+        search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                                                          @Override
+                                                                          public boolean onQueryTextSubmit(String query) {
+                                                                              mSearchText = query;                                                                          // contains user input
+                                                                              Toast.makeText(getContext().getApplicationContext(),
+                                                                                      mSearchText , Toast.LENGTH_SHORT).show();
+                                                                              loadQuery(mSearchText);                                                                       //gives user input as string to loadQuery for Request
 
-        CharSequence searchQuery = search_View.getQuery();
-        String request_plain = searchQuery.toString();
+                                                                              return false;
+                                                                          }
 
-        // CONTROL VAR
-        Toast.makeText(search_list_view.getContext(), request_plain , Toast.LENGTH_LONG).show();
-
-        //TODO IMPLEMENT SEARCH 2 PLAIN
-        loadQuery(request_plain);
+                                                                          @Override
+                                                                          public boolean onQueryTextChange(String newText) {
+                                                                              return false;
+                                                                          }
+                                                                      });
 
         // Inflate the layout for this fragment
         return view;
     }
-
-
 
     private void loadQuery(String request_plain) {
         // TODO URI BUILDER
