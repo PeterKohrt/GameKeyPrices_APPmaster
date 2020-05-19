@@ -58,29 +58,26 @@ public class SearchFragment extends Fragment {
 
         // On Query Text Listener -> ON Text Submit is Query loaded
         search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                                                                          @Override
-                                                                          public boolean onQueryTextSubmit(String query) {
-                                                                              mSearchText = query;                                                                          // contains user input
-                                                                              Toast.makeText(getContext().getApplicationContext(),
-                                                                                      mSearchText , Toast.LENGTH_SHORT).show();
-                                                                              loadQuery(mSearchText);                                                                       //gives user input as string to loadQuery for Request
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mSearchText = query; // contains user input
+                Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
+                loadQuery(mSearchText); //gives user input as string to loadQuery for Request
+                return false; }
 
-                                                                              return false;
-                                                                          }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search_list.clear();  //clear text when text is changed
+                return false; }});
 
-                                                                          @Override
-                                                                          public boolean onQueryTextChange(String newText) {
-                                                                              return false;
-                                                                          }
-                                                                      });
 
         // Inflate the layout for this fragment
-        return view;
-    }
+        return view; }
+
 
     private void loadQuery(String request_plain) {
         // TODO URI BUILDER
-        String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&q="+request_plain;
+        String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&q="+request_plain; //TODO DEPENDS ON REGION SET
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
