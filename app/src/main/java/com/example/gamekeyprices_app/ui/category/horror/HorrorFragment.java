@@ -62,7 +62,7 @@ public class HorrorFragment extends Fragment {
         //define STRING for URL GET REQUEST by Plain
         final String g1 = "residenteviliii";
         final String g2 = "inside";
-        final String g3= "visage";
+        final String g3 = "visage";
         final String g4 = "littlenightmares";
         final String g5 = "storiesuntold";
         final String g6 = "outlastii";

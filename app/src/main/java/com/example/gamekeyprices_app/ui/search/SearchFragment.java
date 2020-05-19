@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,10 @@ public class SearchFragment extends Fragment {
     private AllViewModel allViewModel;
     private List<ListItem> search_list;
     private RecyclerView search_list_view;
+    private SearchView search_View;
+
+    // Example for transferring var from activity to class
+    // public MainActivity mQuery;
 
   //  private RecyclerView mListView;
   //  private String convert;
@@ -42,33 +47,39 @@ public class SearchFragment extends Fragment {
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_search, container, false);
-
         // INITIALIZE LAYOUT
         search_list = new ArrayList<>();
         search_list_view = view.findViewById(R.id.rView);
+        search_View =view.findViewById(R.id.searchView);
 
         // INITIALIZE RecyclerAdapter
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(search_list, getContext());
         search_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         search_list_view.setAdapter(allFragmentRecyclerAdapter);
 
-        //   mListView = view.findViewById(R.id.rView);
-        //   mSearchView = view.findViewById(R.id.searchView);
-        //   convert = mSearchView.getQuery().toString();
+        // Example for transferring var from activity to class
+  /*    mQuery = (MainActivity) getActivity();
+        CharSequence getQueryFromMain = mQuery.query;
+        String request_plain = getQueryFromMain.toString(); */
+
+        CharSequence searchQuery = search_View.getQuery();
+        String request_plain = searchQuery.toString();
+
+        // CONTROL VAR
+        Toast.makeText(search_list_view.getContext(), request_plain , Toast.LENGTH_LONG).show();
 
         //TODO IMPLEMENT SEARCH 2 PLAIN
-        String request_plain = "odyssey";
-
         loadQuery(request_plain);
 
         // Inflate the layout for this fragment
         return view;
     }
+
+
 
     private void loadQuery(String request_plain) {
         // TODO URI BUILDER
@@ -96,15 +107,18 @@ public class SearchFragment extends Fragment {
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
 
-
                                 search_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop));
-
                             }
-
+                            // if response contains no results
+                            if (searchArray.length() <= 1){
+                                Toast.makeText(search_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
+                            }
+                            // if there are results
+                            else {
                             //creating custom adapter object
                             AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(search_list, getContext());
                             //adding the adapter to listview
-                            search_list_view.setAdapter(adapter);
+                            search_list_view.setAdapter(adapter);}
 
                         } catch (JSONException e) {
                             e.printStackTrace();
