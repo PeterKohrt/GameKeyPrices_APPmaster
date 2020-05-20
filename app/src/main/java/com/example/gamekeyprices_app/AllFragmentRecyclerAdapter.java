@@ -18,7 +18,6 @@ import java.util.List;
 public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmentRecyclerAdapter.ViewHolder> {
 
     public List <ListItem> all_list;
-    public Context context;
     public Context mCtx;
 
     public AllFragmentRecyclerAdapter(List<ListItem> all_list, Context mCtx){
@@ -36,7 +35,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
         //INITIALIZE CONTENT
-        context = parent.getContext();
+        mCtx = parent.getContext();
 
         return new ViewHolder(view);
     }
@@ -89,9 +88,9 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
             gameImageView = mView.findViewById(R.id.game_image);
 
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.list_item_placeholder);
+            requestOptions.placeholder(R.drawable.ic_image_placeholder);
 
-            Glide.with(context).applyDefaultRequestOptions(requestOptions).load(downloadUri).into(gameImageView);
+            Glide.with(mCtx).applyDefaultRequestOptions(requestOptions).load(downloadUri).into(gameImageView);
         }
 
         // SET GameTitle

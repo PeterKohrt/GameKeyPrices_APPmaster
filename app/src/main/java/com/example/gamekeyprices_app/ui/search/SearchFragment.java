@@ -28,7 +28,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchFragment extends Fragment {
 
@@ -38,6 +40,7 @@ public class SearchFragment extends Fragment {
     private SearchView search_View;
 
     private String mSearchText;
+    private Map<String,ListItem> plainMap;
 
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
@@ -90,10 +93,12 @@ public class SearchFragment extends Fragment {
                             JSONArray searchArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
                             JSONObject result = obj.getJSONObject("data");  //only Data Object from Response
 
+                            String plainList = "";
+                            plainMap = new HashMap<>();
+
                             for (int i = 0; i < searchArray.length(); i++) {
                                 JSONObject dealObject = searchArray.getJSONObject(i); //for each entry in list-object get DATA
 
-                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO GAME-INFO REQUEST 4 PIC
                                 String gameTitle = dealObject.getString("title");
                                 String price_historic_low = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_now_low = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
@@ -101,19 +106,56 @@ public class SearchFragment extends Fragment {
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
 
-                                search_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop));
+                                if (i == searchArray.length())
+                                plainList = plainList + dealObject.getString("plain");
+                                else plainList = plainList + dealObject.getString("plain") + ",";
+
+                                plainMap.put(dealObject.getString("plain"),new ListItem("", gameTitle, price_historic_low, price_now_low, shop, ""));
                             }
+
                             // if response contains no results
                             if (searchArray.length() <= 1){
                                 Toast.makeText(search_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
                             }
                             // if there are results
                             else {
-                            //creating custom adapter object
-                            AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(search_list, getContext());
-                            //adding the adapter to listview
-                            search_list_view.setAdapter(adapter);}
+                                // zweite request mit plains starten
+                                String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
+                                StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try {
+                                                    JSONObject obj = new JSONObject(response); //Complete JSONObject
+                                                    JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+                                                    for (String plain : plainMap.keySet()){
+                                                        JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
+                                                        plainMap.get(plain).image_url = plainSearchResult.getString("image");
+                                                    }
+                                                    //creating custom adapter object
+                                                    AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+                                                    //adding the adapter to listview
+                                                    search_list_view.setAdapter(adapter);
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                //displaying the error in toast if occurrs
+                                                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                //creating a request queue
+                                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+                                //adding the string request to request queue
+                                requestQueue.add(stringRequest);
+                                }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

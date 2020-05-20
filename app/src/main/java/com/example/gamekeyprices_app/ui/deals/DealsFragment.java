@@ -39,7 +39,6 @@ import java.util.List;
 public class DealsFragment extends Fragment {
 
     public MainActivity mCountry;
-    public MainActivity mRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
@@ -65,23 +64,15 @@ public class DealsFragment extends Fragment {
 
         mCountry = (MainActivity) getActivity();
         String get_mCountryFromMain = mCountry.country;
-        String country = "&country="+get_mCountryFromMain;
+        Toast.makeText(getContext(), get_mCountryFromMain, Toast.LENGTH_LONG).show();
 
-        mRegion = (MainActivity) getActivity();
-        String get_mRegionFromMain = mRegion.region;
-        String region = "&region"+get_mRegionFromMain;
-
-        Toast.makeText(getActivity(), country, Toast.LENGTH_LONG).show();
-        Toast.makeText(getActivity(), region, Toast.LENGTH_LONG).show();
-
-        loadQuery();
+       loadQuery();
 
         // Inflate the layout for this fragment
         return view;
     }
 
     private void loadQuery() {
-        // TODO URI BUILDER
         String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -97,11 +88,12 @@ public class DealsFragment extends Fragment {
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
-                                String game_image_url = "https://www.uscustomstickers.com/wp-content/uploads//2018/10/STFU-Funny-Black-Sticker.png"; //TODO GAME-INFO REQUEST 4 PIC
+                                String game_image_url = ""; //TODO GAME-INFO REQUEST 4 PIC
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
                                 String cut = dealObject.getString("price_cut")+" %";
+                                String plain = dealObject.getString("plain");
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
@@ -125,7 +117,7 @@ public class DealsFragment extends Fragment {
                                     output_expiry = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
                                 }
 
-                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output_expiry));
+                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain));
 
                             }
 

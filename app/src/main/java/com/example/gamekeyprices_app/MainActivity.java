@@ -43,13 +43,11 @@ public class MainActivity extends AppCompatActivity {
     private double longitude;
     private double latitude;
     public String country;
-    public String region;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         check_permissions();
-        getCurrentLocation();
         getCurrentLocation();
 
         super.onCreate(savedInstanceState);
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getCurrentLocation();
             } else {
-                Toast.makeText(this, "Berechtigungen nicht erteilt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -144,16 +142,13 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                                country = addresses.get(0).getLocality();
-                                region = addresses.get(0).getCountryName();
+                                country = addresses.get(0).getCountryName();
 
                             }
                             catch (IOException e){
                                 e.printStackTrace();
-                                Toast.makeText(MainActivity.this, "Fehler: " + e, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
                             }
-
-
                         }
                     }
                 }, Looper.getMainLooper());

@@ -94,13 +94,6 @@ public class ActionFragment extends Fragment {
 
                                 JSONObject gArray = obj_obj.getJSONObject(list[i]);
 
-                                // Maybe by string SPLIT TO GET APP-ID PROBLEM IS IF STEAM IS NOT CHEAPEST ATM OR IN PAST
-                                //String string = "004-034556";
-                                //String[] parts = string.split("-");
-                                //String part1 = parts[0]; // 004
-                                //String part2 = parts[1]; // 034556
-                                //String helper = fpsArray.getJSONObject()
-
                                 //add ID to Game-Image-URL
                                 String game_image_url = "https://steamcdn-a.akamaihd.net/steam/apps/"+picid[i]+"/header.jpg"; //TODO IMAGE FOR GAME AUTOMATIKK
 
@@ -110,7 +103,7 @@ public class ActionFragment extends Fragment {
                                 String price_now_low = gArray.getJSONObject("price").getString("price")+" €";      //TODO DEPENDS ON REGION SET
                                 String shop = gArray.getJSONObject("price").getString("store");
 
-                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop)); //CREATE ITEMS
+                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "")); //CREATE ITEMS
                             }
 
                             //creating custom adapter object

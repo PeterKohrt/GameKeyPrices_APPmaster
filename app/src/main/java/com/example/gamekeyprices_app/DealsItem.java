@@ -1,12 +1,12 @@
 package com.example.gamekeyprices_app;
 
 public class DealsItem {
-    public String image_url, game_title, price_old, price_new, shop, cut, expire;
+    public String image_url, game_title, price_old, price_new, shop, cut, expire, favStatus, plain;
 
     public DealsItem(){}
 
     // CONSTRUCTORS
-    public DealsItem(String image_url, String game_title, String price_old, String price_new, String shop, String cut, String expire) {
+    public DealsItem(String image_url, String game_title, String price_old, String price_new, String shop, String cut, String expire, String favStatus, String plain) {
         this.image_url = image_url;
         this.game_title = game_title;
         this.price_old = price_old;
@@ -14,6 +14,8 @@ public class DealsItem {
         this.shop = shop;
         this.cut = cut;
         this.expire = expire;
+        this.favStatus = favStatus;
+        this.plain = plain;
     }
 
     //GET GAME IMAGE
@@ -37,5 +39,13 @@ public class DealsItem {
     //GET EXPIRE
     public String getExpire() {return  expire;}
 
+    //GET FAV_STATUS
+    public String getFavStatus() {return favStatus;}
 
+    //SET FAV_STATUS
+    public void setFavStatus(String favStatus) {
+        this.favStatus = favStatus;
+    }
+
+    public String getPlain() {return plain;}
 }
