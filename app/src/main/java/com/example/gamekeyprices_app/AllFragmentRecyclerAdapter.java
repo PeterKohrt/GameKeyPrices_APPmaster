@@ -1,9 +1,13 @@
 package com.example.gamekeyprices_app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +23,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
 
     public List <ListItem> all_list;
     public Context mCtx;
+    public FavDB favDB;
 
     public AllFragmentRecyclerAdapter(List<ListItem> all_list, Context mCtx){
         this.mCtx = mCtx;
@@ -31,6 +36,14 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        favDB = new FavDB(mCtx);
+        //create table on first
+        SharedPreferences prefs = mCtx.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+        if (firstStart) {
+            createTableOnFirstStart();
+        }
+
         // INFLATE LAYOUT
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
@@ -42,6 +55,9 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final ListItem listItem = all_list.get(position);
+
+        readCursorData(listItem, holder);
 
         // BIND GAME_TITLE
         String game_title_data = all_list.get(position).getGame_title();
@@ -76,11 +92,33 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         private TextView price_historic_low;
         private TextView price_now_low;
         private TextView cheapest_shop_now;
+        private Button favBtn;
 
         // SET mVIEW
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
+            favBtn = itemView.findViewById(R.id.fav_button_list);
+
+            favBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    ListItem listItem = all_list.get(position);
+
+                    if (listItem.getFavStatus().equals("0")) {
+                        listItem.setFavStatus("1");
+                        favDB.insertIntoTheDatabase(listItem.getPlain(), listItem.getGame_title(), listItem.getImage_url(), listItem.getFavStatus());
+                        favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
+                        favBtn.setSelected(true);
+                    } else {
+                        listItem.setFavStatus("0");
+                        favDB.remove_fav(listItem.getPlain());
+                        favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
+                        favBtn.setSelected(false);
+                    }
+                }
+            });
         }
 
         // SET IMAGE LIST ITEM
@@ -121,6 +159,43 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
     @Override
     public int getItemCount() {
         return all_list.size();
+    }
+
+    private void createTableOnFirstStart() {
+        favDB.insertEmpty();
+
+        SharedPreferences prefs = mCtx.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
+    }
+
+    private void readCursorData(ListItem listItem, AllFragmentRecyclerAdapter.ViewHolder viewHolder) {
+        Cursor cursor = null;
+        SQLiteDatabase db = favDB.getReadableDatabase();
+        try {
+            cursor = favDB.read_all_data(listItem.getPlain());
+            while (cursor.moveToNext()) {
+                String item_fav_staus = cursor.getString(cursor.getColumnIndex(FavDB.FAVORITE_STATUS));
+                listItem.setFavStatus(item_fav_staus);
+
+                //check fav status
+                if (item_fav_staus != null && item_fav_staus.equals("1")) {
+                    viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
+                } else if (item_fav_staus != null && item_fav_staus.equals("0")) {
+                    viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
+                }
+            }
+        }
+        catch (Exception e){
+            //andere exception
+        }
+        finally {
+            if (cursor != null && cursor.isClosed())
+                cursor.close();
+            db.close();
+        }
+
     }
 
 }

@@ -79,7 +79,6 @@ public class SearchFragment extends Fragment {
 
 
     private void loadQuery(String request_plain) {
-        // TODO URI BUILDER
         String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&region=eu1&country=DE&limit=50&q="+request_plain; //TODO DEPENDS ON REGION SET
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -100,13 +99,14 @@ public class SearchFragment extends Fragment {
                                 JSONObject searchObject = searchArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = searchObject.getString("title");
+                                String plain = searchObject.getString("plain");
 
 
                                 if (i == searchArray.length())
                                 plainList = plainList + searchObject.getString("plain");
                                 else plainList = plainList + searchObject.getString("plain") + ",";
 
-                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0"));
+                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0", plain));
                             }
 
                             // if response contains no results
@@ -157,6 +157,7 @@ public class SearchFragment extends Fragment {
                                                         plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price");
                                                         plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price");
                                                         plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
+                                                        plainMap.get(plain).favStatus = "0";
                                                     }
                                                     //creating custom adapter object
                                                     AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());

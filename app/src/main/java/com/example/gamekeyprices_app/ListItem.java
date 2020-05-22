@@ -1,17 +1,19 @@
 package com.example.gamekeyprices_app;
 
 public class ListItem {
-    public String image_url, game_title, price_historic_low, price_now_low, cheapest_shop_now, favStatus;
+    public String image_url, game_title, price_historic_low, price_now_low, cheapest_shop_now, favStatus, plain;
 
     public ListItem(){}
 
     // CONSTRUCTORS
-    public ListItem(String image_url, String game_title, String price_historic_low, String price_now_low, String cheapest_shop_now, String favStatus) {
+    public ListItem(String image_url, String game_title, String price_historic_low, String price_now_low, String cheapest_shop_now, String favStatus, String plain) {
         this.image_url = image_url;
         this.game_title = game_title;
         this.price_historic_low = price_historic_low;
         this.price_now_low = price_now_low;
         this.cheapest_shop_now = cheapest_shop_now;
+        this.favStatus = favStatus;
+        this.plain = plain;
     }
 
     //GET GAME IMAGE
@@ -36,6 +38,9 @@ public class ListItem {
     public void setFavStatus(String favStatus) {
         this.favStatus = favStatus;
     }
+
+    //GET PLAIN
+    public String getPlain() {return plain;}
 
 
 }

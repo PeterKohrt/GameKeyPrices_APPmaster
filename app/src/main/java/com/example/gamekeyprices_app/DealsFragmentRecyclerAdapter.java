@@ -118,7 +118,7 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
 
                    if (dealsItem.getFavStatus().equals("0")) {
                         dealsItem.setFavStatus("1");
-                        favDB.insertIntoTheDatabase(dealsItem.getPlain(), dealsItem.getGame_title(), "dealsItem.getImage_url()", dealsItem.getFavStatus());
+                        favDB.insertIntoTheDatabase(dealsItem.getPlain(), dealsItem.getGame_title(), dealsItem.getImage_url(), dealsItem.getFavStatus());
                         favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
                         favBtn.setSelected(true);
                     } else {

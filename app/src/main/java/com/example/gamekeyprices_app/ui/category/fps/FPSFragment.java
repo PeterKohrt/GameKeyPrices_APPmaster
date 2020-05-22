@@ -109,8 +109,9 @@ public class FPSFragment extends Fragment {
                                 String price_historic_low = fpsArray.getJSONObject("lowest").getString("price")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_now_low = fpsArray.getJSONObject("price").getString("price")+" €";      //TODO DEPENDS ON REGION SET
                                 String shop = fpsArray.getJSONObject("price").getString("store");
+                                String plain = fpsList[i];
 
-                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "")); //CREATE ITEMS
+                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain)); //CREATE ITEMS
                             }
 
                             //creating custom adapter object
