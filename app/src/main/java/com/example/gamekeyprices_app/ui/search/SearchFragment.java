@@ -154,8 +154,8 @@ public class SearchFragment extends Fragment {
                                                     JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
                                                     for (String plain : plainMap.keySet()){
                                                         JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
-                                                        plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price");
-                                                        plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price");
+                                                        plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" €";
+                                                        plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" €";
                                                         plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
                                                         plainMap.get(plain).favStatus = "0";
                                                     }
