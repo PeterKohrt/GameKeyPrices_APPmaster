@@ -41,7 +41,10 @@ public class FavoritesFragment extends Fragment {
     private List<ListItem> favItemList = new ArrayList<>();
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
-    private Map<String,ListItem> plainMap;
+    private ArrayList<String> plainList = new ArrayList<String>();
+    private ArrayList<String> plainListImage = new ArrayList<String>();
+    private ArrayList<String> plainListTitle = new ArrayList<String>();
+    private int ArrayListLength = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,30 +70,73 @@ public class FavoritesFragment extends Fragment {
         }
         SQLiteDatabase db = favDB.getReadableDatabase();
         Cursor cursor = favDB.select_all_favorite_list();
+
+        String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&plains=";
         try {
+            // JSON URL WHILE
             while (cursor.moveToNext()) {
-                String id = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));
-                String title = cursor.getString(cursor.getColumnIndex(FavDB.GAME_TITLE));
-                String image = cursor.getString(cursor.getColumnIndex(FavDB.ITEM_IMAGE));
-                ListItem favItem = new ListItem(image, title,"","","","", id);
-
                 String request_Plain = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));   //TODO 1 Request only + IF ZERO / ONE / TWO OR MORE ITEMS
+                String image = cursor.getString(cursor.getColumnIndex(FavDB.ITEM_IMAGE));
+                String gameTitle = cursor.getString(cursor.getColumnIndex(FavDB.GAME_TITLE));
+                JSON_URL = JSON_URL + request_Plain + ",";
 
-                String JSON_URL = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+request_Plain; //TODO DEPENDS ON REGION SET
-                //Toast.makeText(getContext().getApplicationContext(), JSON_URL, Toast.LENGTH_LONG).show();
-
-                favItemList.add(favItem);
+                plainList.add(request_Plain);
+                plainListImage.add(image);
+                plainListTitle.add(gameTitle);
+                ArrayListLength = ArrayListLength + 1;
             }
+
+            JSON_URL = JSON_URL.substring(0, JSON_URL.length() -1);
+
+            StringRequest request = new StringRequest(StringRequest.Method.GET, JSON_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject obj = new JSONObject(response);
+                                JSONObject data = obj.getJSONObject("data");
+
+                                for(int i = 0; i<ArrayListLength; i++) {
+                                    JSONObject favObj = data.getJSONObject(plainList.get(i));
+                                    JSONObject priceObj = favObj.getJSONObject("price");
+                                    JSONObject lowPriceObj = favObj.optJSONObject("lowest");
+
+                                    String lowest_price_now = priceObj.getString("price");
+                                    String cheapest_shop_now = priceObj.getString("store");
+                                    String historical_price_low = lowPriceObj.getString("price");
+
+                                    favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i)));
+                                }
+
+                                //creating custom adapter object
+                                AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(favItemList, getContext());
+                                //adding the adapter to listview
+                                favourite_view.setAdapter(adapter);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //displaying the error in toast if occurrs
+                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            //creating a request queue
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+            //adding the string request to request queue
+            requestQueue.add(request);
+
         } finally {
             if (cursor != null && cursor.isClosed())
                 cursor.close();
             db.close();
         }
-
-        allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(favItemList, getContext());
-
-        favourite_view.setAdapter(allFragmentRecyclerAdapter);
-
     }
 
     // remove item after swipe

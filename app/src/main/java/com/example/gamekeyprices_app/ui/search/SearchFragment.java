@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -79,6 +80,7 @@ public class SearchFragment extends Fragment {
 
 
     private void loadQuery(String request_plain) {
+
         String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&region=eu1&country=DE&limit=50&q="+request_plain; //TODO DEPENDS ON REGION SET
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
