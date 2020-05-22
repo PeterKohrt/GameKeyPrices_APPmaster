@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,14 +116,16 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
                     int position = getAdapterPosition();
                     DealsItem dealsItem = deals_list.get(position);
 
-                    if (dealsItem.getFavStatus().equals("0")) {
+                   if (dealsItem.getFavStatus().equals("0")) {
                         dealsItem.setFavStatus("1");
-                        favDB.insertIntoTheDatabase(dealsItem.getPlain(), dealsItem.getGame_title(), dealsItem.getImage_url(), dealsItem.getFavStatus());
+                        favDB.insertIntoTheDatabase(dealsItem.getPlain(), dealsItem.getGame_title(), "dealsItem.getImage_url()", dealsItem.getFavStatus());
                         favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
+                        favBtn.setSelected(true);
                     } else {
                         dealsItem.setFavStatus("0");
                         favDB.remove_fav(dealsItem.getPlain());
                         favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
+                        favBtn.setSelected(false);
                     }
                 }
             });
@@ -207,8 +208,6 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
                     viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
                 }
             }
-        }catch (SQLiteException e) {
-            //no such column
         }
         catch (Exception e){
             //andere exception

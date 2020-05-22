@@ -37,23 +37,16 @@ public class FavDB extends SQLiteOpenHelper {
     public void insertEmpty() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        // enter your value
-        for (int x = 1; x < 300; x++) {
-            cv.put(KEY_ID, x);
-            cv.put(FAVORITE_STATUS, "0");
-
-            db.insert(TABLE_NAME,null, cv);
-        }
     }
 
     // insert data into database
-    public void insertIntoTheDatabase(String item_title, String item_image, String id, String fav_status) {
+    public void insertIntoTheDatabase(String plain, String item_title, String item_image, String fav_status) {
         SQLiteDatabase db;
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put(KEY_ID, plain);
         cv.put(GAME_TITLE, item_title);
         cv.put(ITEM_IMAGE, item_image);
-        cv.put(KEY_ID, id);
         cv.put(FAVORITE_STATUS, fav_status);
         db.insert(TABLE_NAME,null, cv);
         Log.d("FavDB Status", item_title + ", favstatus - "+fav_status+" - . " + cv);
@@ -62,14 +55,14 @@ public class FavDB extends SQLiteOpenHelper {
     //read all data
     public Cursor read_all_data(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select * from " + TABLE_NAME + " where " + KEY_ID+"="+id+"";
+           String sql = "select * from " + TABLE_NAME + " where " + KEY_ID +"='"+id+"'";
         return db.rawQuery(sql,null,null);
     }
 
     // remove line from database
     public void remove_fav(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "UPDATE " + TABLE_NAME + " SET  "+ FAVORITE_STATUS+" ='0' WHERE "+KEY_ID+"="+id+"";
+        String sql = "UPDATE " + TABLE_NAME + " SET  "+ FAVORITE_STATUS+" ='0' WHERE "+KEY_ID+"='"+id+"'";
         db.execSQL(sql);
         Log.d("remove", id.toString());
 

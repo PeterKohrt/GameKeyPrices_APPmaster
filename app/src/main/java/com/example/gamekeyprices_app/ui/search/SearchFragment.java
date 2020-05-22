@@ -119,7 +119,7 @@ public class SearchFragment extends Fragment {
                             }
                             // if there are results
                             else {
-                                // zweite request mit plains starten
+                                // second request INFO with plains
                                 String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
                                 StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,

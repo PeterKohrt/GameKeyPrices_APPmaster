@@ -39,6 +39,8 @@ import java.util.List;
 public class DealsFragment extends Fragment {
 
     public MainActivity mCountry;
+    private String iCountry;
+    private String iRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
@@ -62,9 +64,18 @@ public class DealsFragment extends Fragment {
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
 
+        //TODO get right value
+
         mCountry = (MainActivity) getActivity();
         String get_mCountryFromMain = mCountry.country;
+
+        if (mCountry.equals("USA")){iCountry="US";iRegion="us";}
+        if (mCountry.equals("Deutschland")){iCountry="DE";iRegion="eu1";}
+        else {iCountry="DE";iRegion="eu1";}
+
         Toast.makeText(getContext(), get_mCountryFromMain, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), iCountry, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), iRegion, Toast.LENGTH_LONG).show();
 
        loadQuery();
 
