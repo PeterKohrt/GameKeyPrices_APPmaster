@@ -34,7 +34,9 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DealsFragment extends Fragment {
 
@@ -44,6 +46,9 @@ public class DealsFragment extends Fragment {
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
+
+
+    private Map<String, DealsItem> plainMap;
 
     // ADAPTER
     private DealsFragmentRecyclerAdapter dealsFragmentRecyclerAdapter;
@@ -96,6 +101,9 @@ public class DealsFragment extends Fragment {
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
                             JSONArray gameDealArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
 
+                            String plainList = "";
+                            plainMap = new HashMap<>();
+
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
@@ -104,7 +112,7 @@ public class DealsFragment extends Fragment {
                                 String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
                                 String cut = dealObject.getString("price_cut")+" %";
-                                String plain = dealObject.getString("plain");
+                                //String plain = dealObject.getString("plain");
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
@@ -128,15 +136,58 @@ public class DealsFragment extends Fragment {
                                     output_expiry = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
                                 }
 
-                                deals_list.add(new DealsItem(game_image_url, gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain));
+
+                                if (i == gameDealArray.length())
+                                    plainList = plainList + dealObject.getString("plain");
+                                else plainList = plainList + dealObject.getString("plain") + ",";
+
+                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0"));
 
                             }
 
-                            //creating custom adapter object
-                            DealsFragmentRecyclerAdapter adapter = new DealsFragmentRecyclerAdapter(deals_list, getContext());
-                            //adding the adapter to listview
-                            deals_list_view.setAdapter(adapter);
+                            // if response contains no results
+                            if (gameDealArray.length() <= 1) {
+                                Toast.makeText(deals_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
+                            }
+                            // if there are results
+                            else {
+                                // second request INFO with plains
+                                String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
+                                StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try {
+                                                    JSONObject obj = new JSONObject(response); //Complete JSONObject
+                                                    JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+                                                    for (String plain : plainMap.keySet()){
+                                                        JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
+                                                        plainMap.get(plain).image_url = plainSearchResult.getString("image");
+                                                    }
+                                                    //creating custom adapter object
+                                                    DealsFragmentRecyclerAdapter adapter = new DealsFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+                                                    //adding the adapter to listview
+                                                    deals_list_view.setAdapter(adapter);
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                //displaying the error in toast if occurrs
+                                                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                //creating a request queue
+                                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+                                //adding the string request to request queue
+                                requestQueue.add(stringRequest);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
