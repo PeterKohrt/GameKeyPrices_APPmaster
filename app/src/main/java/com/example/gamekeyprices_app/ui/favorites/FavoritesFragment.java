@@ -77,7 +77,7 @@ public class FavoritesFragment extends Fragment {
                 String request_Plain = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));   //TODO 1 Request only + IF ZERO / ONE / TWO OR MORE ITEMS
 
                 String JSON_URL = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+request_Plain; //TODO DEPENDS ON REGION SET
-                Toast.makeText(getContext().getApplicationContext(), JSON_URL, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext().getApplicationContext(), JSON_URL, Toast.LENGTH_LONG).show();
 
                 favItemList.add(favItem);
             }

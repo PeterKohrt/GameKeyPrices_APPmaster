@@ -58,6 +58,7 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final DealsItem dealsItem = deals_list.get(position);
+        holder.setIsRecyclable(false); //TODO setIsRecycable not the best but easy way
 
         readCursorData(dealsItem, holder);
 

@@ -56,6 +56,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final ListItem listItem = all_list.get(position);
+        holder.setIsRecyclable(false); //TODO setIsRecycable not the best but easy way
 
         readCursorData(listItem, holder);
 
