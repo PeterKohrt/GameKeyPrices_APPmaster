@@ -89,7 +89,7 @@ public class DealsFragment extends Fragment {
     }
 
     private void loadQuery() {
-        String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE";
+        String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&limit=100";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
@@ -107,7 +107,6 @@ public class DealsFragment extends Fragment {
                             for (int i = 0; i < gameDealArray.length(); i++) {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
-                                String game_image_url = ""; //TODO GAME-INFO REQUEST 4 PIC
                                 String gameTitle = dealObject.getString("title");
                                 String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
