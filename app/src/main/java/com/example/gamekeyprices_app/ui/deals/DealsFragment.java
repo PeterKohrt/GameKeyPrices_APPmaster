@@ -140,7 +140,7 @@ public class DealsFragment extends Fragment {
                                     plainList = plainList + dealObject.getString("plain");
                                 else plainList = plainList + dealObject.getString("plain") + ",";
 
-                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0"));
+                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", ""));
 
                             }
 

@@ -100,11 +100,7 @@ public class SearchFragment extends Fragment {
                                 JSONObject searchObject = searchArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = searchObject.getString("title");
-                               // String price_historic_low = searchObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
-                               // String price_now_low = searchObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
 
-                                // shop is an separate object in list-array-object -> getJSONObject("shop) ...
-                                //String shop = searchObject.getJSONObject("shop").getString("name");
 
                                 if (i == searchArray.length())
                                 plainList = plainList + searchObject.getString("plain");
