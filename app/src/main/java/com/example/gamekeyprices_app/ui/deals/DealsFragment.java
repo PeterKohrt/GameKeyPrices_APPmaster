@@ -111,7 +111,7 @@ public class DealsFragment extends Fragment {
                                 String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
                                 String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
                                 String cut = dealObject.getString("price_cut")+" %";
-                                //String plain = dealObject.getString("plain");
+                                String plain = dealObject.getString("plain");
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
@@ -140,7 +140,7 @@ public class DealsFragment extends Fragment {
                                     plainList = plainList + dealObject.getString("plain");
                                 else plainList = plainList + dealObject.getString("plain") + ",";
 
-                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", ""));
+                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain));
 
                             }
 
