@@ -6,14 +6,16 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc1474d1-134d-4c7f-bd9c-0c425c162ad6" name="Default Changelist" comment="" />
+    <list default="true" id="cc1474d1-134d-4c7f-bd9c-0c425c162ad6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchFragment.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ed902a63" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29_x86" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -38,8 +40,8 @@
   </component>
   <component name="ProjectId" id="1cGIHpQsNVlVMEFKCeeKXxtYS6E" />
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ed902a63" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-23T13:46:43.775Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Nexus_5X_API_29_x86" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-23T22:51:16.496Z" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../FavoriteList" />
   </component>
   <component name="RunDashboard">
