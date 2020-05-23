@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                getCurrentLocation();
             } else {
+                mCountryFromMain="&country=US";mRegionFromMain="&region=us";
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
 
             }
@@ -202,9 +203,6 @@ public class MainActivity extends AppCompatActivity {
                                 if(mCountryFromMain.equals("&country=TR")){mRegionFromMain="&region=tr";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
                                 //CN
                                 if(mCountryFromMain.equals("&country=CN")){mRegionFromMain="&region=cn";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
-
-                                else {mRegionFromMain="";}
-
 
                             }
                             catch (IOException e){
