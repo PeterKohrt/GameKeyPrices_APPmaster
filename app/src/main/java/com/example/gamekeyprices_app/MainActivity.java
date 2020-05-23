@@ -42,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private double longitude;
     private double latitude;
-    public String country;
+    private String country;
+    public String mCountryFromMain;
+    public String mRegionFromMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         check_permissions();
-        getCurrentLocation();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length >0)
         {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
+               getCurrentLocation();
             } else {
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
 
@@ -142,7 +143,14 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                                country = addresses.get(0).getCountryName();
+                                country = addresses.get(0).getCountryCode();
+                                mCountryFromMain = "&country=" + country;
+                                mRegionFromMain = "";
+                                if(mCountryFromMain.equals("&country=US")){mRegionFromMain="&region=us";}
+                                if(mCountryFromMain.equals("&country=DE")){mRegionFromMain="&region=eu1";}
+
+                                Toast.makeText(getApplicationContext(), mCountryFromMain, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), mRegionFromMain, Toast.LENGTH_SHORT).show();
 
                             }
                             catch (IOException e){

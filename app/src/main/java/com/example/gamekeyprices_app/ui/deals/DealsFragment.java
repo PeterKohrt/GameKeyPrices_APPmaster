@@ -41,9 +41,8 @@ import java.util.Map;
 
 public class DealsFragment extends Fragment {
 
-    public MainActivity mCountry;
-    private String iCountry;
-    private String iRegion;
+    public MainActivity iCountry;
+    public MainActivity iRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
@@ -70,28 +69,20 @@ public class DealsFragment extends Fragment {
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
 
-        //TODO get right value
-
-        mCountry = (MainActivity) getActivity();
-        String get_mCountryFromMain = mCountry.country;
-
-        if (mCountry.equals("US")){iCountry="US";iRegion="us";}
-        if (mCountry.equals(" US")){iCountry="US";iRegion="us";}
-        if (mCountry.equals("Deutschland")){iCountry="DE";iRegion="eu1";}
-        else {iCountry="DE";iRegion="eu1";}
-
-        Toast.makeText(getContext(), get_mCountryFromMain, Toast.LENGTH_LONG).show();
-        Toast.makeText(getContext(), iCountry, Toast.LENGTH_LONG).show();
-        Toast.makeText(getContext(), iRegion, Toast.LENGTH_LONG).show();
-
-       loadQuery();
+        iCountry = (MainActivity) getActivity();
+        String setCountry = iCountry.mCountryFromMain;
+        iRegion = (MainActivity) getActivity();
+        String setRegion = iRegion.mRegionFromMain;
+        
+       loadQuery(setCountry, setRegion);
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void loadQuery() {
-        String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&limit=100";
+    private void loadQuery(String county, String region) {
+        String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=100"+county+region;
+        Toast.makeText(getContext(), JSON_URL, Toast.LENGTH_SHORT).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
@@ -103,6 +94,10 @@ public class DealsFragment extends Fragment {
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
                             JSONArray gameDealArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
 
+                            JSONObject obj_meta = obj.getJSONObject(".meta");
+                            String currency = obj_meta.getString("currency");
+                            Toast.makeText(getContext().getApplicationContext(), currency, Toast.LENGTH_SHORT).show();
+
                             String plainList = "";
                             plainMap = new HashMap<>();
 
@@ -110,8 +105,8 @@ public class DealsFragment extends Fragment {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old")+" €";      //TODO DEPENDS ON REGION SET
-                                String price_new = dealObject.getString("price_new")+" €";      //TODO DEPENDS ON REGION SET
+                                String price_old = dealObject.getString("price_old") + " " + currency;      //TODO DEPENDS ON REGION SET
+                                String price_new = dealObject.getString("price_new") + " " + currency;      //TODO DEPENDS ON REGION SET
                                 String cut = dealObject.getString("price_cut")+" %";
                                 String plain = dealObject.getString("plain");
 
