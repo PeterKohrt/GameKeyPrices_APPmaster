@@ -115,15 +115,13 @@ public class SearchFragment extends Fragment {
 
                                 String gameTitle = searchObject.getString("title");
                                 String plain = searchObject.getString("plain");
-                                String shopLink = searchObject.getJSONObject("urls").getString("buy");
-
 
 
                                 if (i == searchArray.length())
                                 plainList = plainList + searchObject.getString("plain");
                                 else plainList = plainList + searchObject.getString("plain") + ",";
 
-                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0", plain, shopLink));
+                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0", plain, ""));
                             }
 
                             // if response contains no results
@@ -165,6 +163,7 @@ public class SearchFragment extends Fragment {
                                                                             plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" "+currency;
                                                                             plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" "+currency;
                                                                             plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
+                                                                            plainMap.get(plain).shopLink = plainSearchResult.getJSONObject("price").getString("url");
                                                                             plainMap.get(plain).favStatus = "0";
                                                                         }
                                                                         //creating custom adapter object
