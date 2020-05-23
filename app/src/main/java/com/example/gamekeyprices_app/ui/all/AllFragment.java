@@ -70,7 +70,7 @@ public class AllFragment extends Fragment {
                             JSONObject res_data = new JSONObject(obj.get("data").toString());
                             JSONObject game = new JSONObject(res_data.get("europauniversalisiv").toString());
 
-                            game_list.add(new ListItem("https://steamcdn-a.akamaihd.net/steam/apps/255163/header.jpg", game.toString(), "", "", ""));
+                            game_list.add(new ListItem("https://steamcdn-a.akamaihd.net/steam/apps/255163/header.jpg", game.toString(), "", "", "", "0","needed",""));
 
 
                         } catch (JSONException e) {
@@ -92,17 +92,8 @@ public class AllFragment extends Fragment {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
-        final ListItem testItem = new ListItem("https://i.kym-cdn.com/photos/images/newsfeed/000/764/965/47a.jpg", "Spiele Titel", "1.0", "1.5", "steam");
-        final ListItem testItem2 = new ListItem("https://steamcdn-a.akamaihd.net/steam/apps/236850/header.jpg", "Spiele Titel 2", "1.0", "2.5", "steam");
-
-
         //public ListItem(String image_url, String game_title, String price_historic_low, String price_now_low, String cheapest_shop_now)
 
-        game_list.add(testItem2);
-        game_list.add(testItem);
-        game_list.add(testItem2);
-        game_list.add(testItem2);
-        game_list.add(testItem2);
 
         // Inflate the layout for this fragment
         return view;

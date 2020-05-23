@@ -1,9 +1,13 @@
 package com.example.gamekeyprices_app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,13 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFragmentRecyclerAdapter.ViewHolder> {
 
     public List <DealsItem> deals_list;
-    public Context context;
     public Context mCtx;
+    public FavDB favDB;
 
     public DealsFragmentRecyclerAdapter(List<DealsItem> deals_list, Context mCtx){
         this.mCtx = mCtx;
@@ -28,21 +34,33 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
     }
 
     // METHODS FOR ADAPTER
-    @NonNull
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        favDB = new FavDB(mCtx);
+        //create table on first
+        SharedPreferences prefs = mCtx.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+        if (firstStart) {
+            createTableOnFirstStart();
+        }
 
         // INFLATE LAYOUT
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deals_item, parent, false);
 
         //INITIALIZE CONTENT
-        context = parent.getContext();
+        mCtx = parent.getContext();
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        final DealsItem dealsItem = deals_list.get(position);
+        holder.setIsRecyclable(false); //TODO setIsRecycable not the best but easy way
+
+        readCursorData(dealsItem, holder);
 
         // BIND GAME_TITLE
         String game_title_data = deals_list.get(position).getGame_title();
@@ -71,6 +89,10 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         // BIND EXPIRE
         String expire_data = deals_list.get(position).getExpire();
         holder.setExpire(expire_data);
+
+        //BIND URL
+        String shop_URL = deals_list.get(position).getShoplink();
+        holder.setURL(shop_URL);
     }
 
     // METHOD for VIEWHOLDER
@@ -85,11 +107,34 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         private TextView shop_name;
         private TextView cut;
         private TextView expire;
+        private Button favBtn;
+        private TextView deal_url;
 
         // SET mVIEW
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
+            favBtn = itemView.findViewById(R.id.fav_button_deal);
+
+            favBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    DealsItem dealsItem = deals_list.get(position);
+
+                   if (dealsItem.getFavStatus().equals("0")) {
+                        dealsItem.setFavStatus("1");
+                        favDB.insertIntoTheDatabase(dealsItem.getPlain(), dealsItem.getGame_title(), dealsItem.getImage_url(), dealsItem.getFavStatus());
+                        favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
+                        favBtn.setSelected(true);
+                    } else {
+                        dealsItem.setFavStatus("0");
+                        favDB.remove_fav(dealsItem.getPlain());
+                        favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
+                        favBtn.setSelected(false);
+                    }
+                }
+            });
         }
 
         // SET IMAGE LIST ITEM
@@ -97,9 +142,9 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
             gameImageView = mView.findViewById(R.id.game_image_deals);
 
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.list_item_placeholder);
+            requestOptions.placeholder(R.drawable.ic_image_placeholder);
 
-            Glide.with(context).applyDefaultRequestOptions(requestOptions).load(downloadUri).into(gameImageView);
+            Glide.with(mCtx).applyDefaultRequestOptions(requestOptions).load(downloadUri).into(gameImageView);
         }
 
         // SET GameTitle
@@ -137,11 +182,54 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
             expire = mView.findViewById(R.id.expire_value);
             expire.setText(expireDate);
         }
+
+        //SET URL
+        public void setURL(String shopURL){
+            deal_url = mView.findViewById(R.id.url_field);
+            deal_url.setText(shopURL);
+        }
     }
 
     @Override
     public int getItemCount() {
         return deals_list.size();
+    }
+
+    private void createTableOnFirstStart() {
+        favDB.insertEmpty();
+
+        SharedPreferences prefs = mCtx.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
+    }
+
+    private void readCursorData(DealsItem dealsItem, ViewHolder viewHolder) {
+        Cursor cursor = null;
+        SQLiteDatabase db = favDB.getReadableDatabase();
+        try {
+            cursor = favDB.read_all_data(dealsItem.getPlain());
+            while (cursor.moveToNext()) {
+                String item_fav_staus = cursor.getString(cursor.getColumnIndex(FavDB.FAVORITE_STATUS));
+                dealsItem.setFavStatus(item_fav_staus);
+
+                //check fav status
+                if (item_fav_staus != null && item_fav_staus.equals("1")) {
+                    viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
+                } else if (item_fav_staus != null && item_fav_staus.equals("0")) {
+                    viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_unchecked);
+                }
+            }
+        }
+        catch (Exception e){
+            //andere exception
+        }
+        finally {
+            if (cursor != null && cursor.isClosed())
+                cursor.close();
+            db.close();
+        }
+
     }
 
 }

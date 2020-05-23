@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GameKeyPrices_APP.iml" filepath="$PROJECT_DIR$/GameKeyPrices_APP.iml" group="GameKeyPrices_APP" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GameKeyPrices_App.iml" filepath="$PROJECT_DIR$/.idea/GameKeyPrices_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="GameKeyPrices_APP/app" />
     </modules>
   </component>
