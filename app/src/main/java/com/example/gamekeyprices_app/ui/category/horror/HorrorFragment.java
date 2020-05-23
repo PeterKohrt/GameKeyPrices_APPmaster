@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.example.gamekeyprices_app.ListItem;
+import com.example.gamekeyprices_app.MainActivity;
 import com.example.gamekeyprices_app.R;
 import com.example.gamekeyprices_app.ui.all.AllViewModel;
 
@@ -29,6 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HorrorFragment extends Fragment {
+
+    public MainActivity iCountry;
+    public MainActivity iRegion;
 
     private AllViewModel allViewModel;
     private List<ListItem> game_list;
@@ -51,13 +55,18 @@ public class HorrorFragment extends Fragment {
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
 
-        loadQuery();
+        iCountry = (MainActivity) getActivity();
+        String setCountry = iCountry.mCountryFromMain;
+        iRegion = (MainActivity) getActivity();
+        String setRegion = iRegion.mRegionFromMain;
+
+        loadQuery(setCountry, setRegion);
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void loadQuery() {
+    private void loadQuery(String county, String region) {
 
         //define STRING for URL GET REQUEST by Plain
         final String g1 = "residenteviliii";
@@ -73,7 +82,8 @@ public class HorrorFragment extends Fragment {
 
         String glist = ""+g1+"%2C"+g2+"%2C"+g3+"%2C"+g4+"%2C"+g5+"%2C"+g6+"%2C"+g7+"%2C"+g8+"%2C"+g9+"%2C"+g10;
 
-        String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&plains="+glist; //GET REQUEST for 10 Preselected Games
+        String JSON_URL_C_R = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5"+county+region;
+        String JSON_URL = JSON_URL_C_R + "&plains=" + glist; //GET REQUEST for 10 Preselected Games
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
@@ -82,6 +92,9 @@ public class HorrorFragment extends Fragment {
                         try {
                             JSONObject obj = new JSONObject(response); //Complete JSONObject
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+
+                            JSONObject obj_meta = obj.getJSONObject(".meta");
+                            String currency = obj_meta.getString("currency");
 
                             //Helper Array to get through JSON OBJECTS
                             String[] list = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
@@ -94,20 +107,13 @@ public class HorrorFragment extends Fragment {
 
                                 JSONObject gArray = obj_obj.getJSONObject(list[i]);
 
-                                // Maybe by string SPLIT TO GET APP-ID PROBLEM IS IF STEAM IS NOT CHEAPEST ATM OR IN PAST
-                                //String string = "004-034556";
-                                //String[] parts = string.split("-");
-                                //String part1 = parts[0]; // 004
-                                //String part2 = parts[1]; // 034556
-                                //String helper = fpsArray.getJSONObject()
-
                                 //add ID to Game-Image-URL
-                                String game_image_url = "https://steamcdn-a.akamaihd.net/steam/apps/"+picid[i]+"/header.jpg"; //TODO IMAGE FOR GAME AUTOMATIKK
+                                String game_image_url = "https://steamcdn-a.akamaihd.net/steam/apps/"+picid[i]+"/header.jpg";
 
                                 //set plain titel better than no title atm
-                                String gameTitle = title[i];                                                                                          //TODO ADD NO-PLAIN TITLE
-                                String price_historic_low = gArray.getJSONObject("lowest").getString("price")+" €";      //TODO DEPENDS ON REGION SET
-                                String price_now_low = gArray.getJSONObject("price").getString("price")+" €";      //TODO DEPENDS ON REGION SET
+                                String gameTitle = title[i];
+                                String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
+                                String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
                                 String shop = gArray.getJSONObject("price").getString("store");
                                 String plain = list[i];
 

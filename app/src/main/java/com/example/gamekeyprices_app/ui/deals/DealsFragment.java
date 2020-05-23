@@ -82,7 +82,6 @@ public class DealsFragment extends Fragment {
 
     private void loadQuery(String county, String region) {
         String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=100"+county+region;
-        Toast.makeText(getContext(), JSON_URL, Toast.LENGTH_SHORT).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
@@ -96,7 +95,6 @@ public class DealsFragment extends Fragment {
 
                             JSONObject obj_meta = obj.getJSONObject(".meta");
                             String currency = obj_meta.getString("currency");
-                            Toast.makeText(getContext().getApplicationContext(), currency, Toast.LENGTH_SHORT).show();
 
                             String plainList = "";
                             plainMap = new HashMap<>();
