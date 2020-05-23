@@ -1,6 +1,7 @@
 package com.example.gamekeyprices_app.ui.search;
 
 import android.os.Bundle;
+import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,6 +44,7 @@ public class SearchFragment extends Fragment {
 
     private String mSearchText;
     private Map<String,ListItem> plainMap;
+    private String plainList;
 
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
@@ -49,7 +52,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
         // INITIALIZE LAYOUT
         search_list = new ArrayList<>();
         search_View = view.findViewById(R.id.searchView);
@@ -80,13 +83,13 @@ public class SearchFragment extends Fragment {
 
 
     private void loadQuery(String request_plain) {
-
-        String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&region=eu1&country=DE&limit=50&q="+request_plain; //TODO DEPENDS ON REGION SET
+         String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&region=eu1&country=DE&limit=50&q="+request_plain; //TODO DEPENDS ON REGION SET
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject obj = new JSONObject(response); //Complete JSONObject
 
@@ -94,7 +97,7 @@ public class SearchFragment extends Fragment {
                             JSONArray searchArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
                             JSONObject result = obj.getJSONObject("data");  //only Data Object from Response
 
-                            String plainList = "";
+                            plainList = "";
                             plainMap = new HashMap<>();
 
                             for (int i = 0; i < searchArray.length(); i++) {
@@ -120,7 +123,7 @@ public class SearchFragment extends Fragment {
                                 // second request INFO with plains
                                 String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
-                                StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
+                                StringRequest stringRequest1 = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
                                         new Response.Listener<String>() {
                                             @Override
                                             public void onResponse(String response) {
@@ -132,6 +135,46 @@ public class SearchFragment extends Fragment {
                                                         plainMap.get(plain).image_url = plainSearchResult.getString("image");
                                                     }
 
+                                                    String INNER_JSON_REQUEST2 = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
+
+                                                    StringRequest stringRequest2 = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST2,
+                                                            new Response.Listener<String>() {
+                                                                @Override
+                                                                public void onResponse(String response) {
+                                                                    try {
+                                                                        JSONObject obj = new JSONObject(response); //Complete JSONObject
+                                                                        JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+                                                                        for (String plain : plainMap.keySet()){
+                                                                            JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
+                                                                            plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" €";
+                                                                            plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" €";
+                                                                            plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
+                                                                            plainMap.get(plain).favStatus = "0";
+                                                                        }
+                                                                        //creating custom adapter object
+                                                                        AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+                                                                        //adding the adapter to listview
+                                                                        search_list_view.setAdapter(adapter);
+
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+                                                            },
+                                                            new Response.ErrorListener() {
+                                                                @Override
+                                                                public void onErrorResponse(VolleyError error) {
+                                                                    //displaying the error in toast if occurrs
+                                                                    Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+
+                                                    //creating a request queue
+                                                    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+                                                    //adding the string request to request queue
+                                                    requestQueue.add(stringRequest2);requestQueue.add(stringRequest2);
+
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
@@ -145,44 +188,12 @@ public class SearchFragment extends Fragment {
                                             }
                                         });
 
-                                String INNER_JSON_REQUEST2 = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
-                                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST2,
-                                        new Response.Listener<String>() {
-                                            @Override
-                                            public void onResponse(String response) {
-                                                try {
-                                                    JSONObject obj = new JSONObject(response); //Complete JSONObject
-                                                    JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
-                                                    for (String plain : plainMap.keySet()){
-                                                        JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
-                                                        plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" €";
-                                                        plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" €";
-                                                        plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
-                                                        plainMap.get(plain).favStatus = "0";
-                                                    }
-                                                    //creating custom adapter object
-                                                    AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
-                                                    //adding the adapter to listview
-                                                    search_list_view.setAdapter(adapter);
-
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                //displaying the error in toast if occurrs
-                                                Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
                                 //creating a request queue
                                 RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
                                 //adding the string request to request queue
-                                requestQueue.add(stringRequest2);requestQueue.add(stringRequest);
+                                requestQueue.add(stringRequest1);
 
 
                                 }
@@ -197,7 +208,7 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
-                        Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "error: timeout", Toast.LENGTH_SHORT).show();     //TODO FIX TIMEOUT
                     }
                 });
         //creating a request queue
@@ -206,6 +217,10 @@ public class SearchFragment extends Fragment {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS));
     }
 
 }

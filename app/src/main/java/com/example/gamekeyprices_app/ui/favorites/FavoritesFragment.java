@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -48,20 +49,21 @@ public class FavoritesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
         favDB = new FavDB(getActivity());
-        favourite_view = root.findViewById(R.id.fav_recycler);
-        favourite_view.setHasFixedSize(true);
+        favourite_view = view.findViewById(R.id.fav_recycler);
+        //favourite_view.setHasFixedSize(true);
         favourite_view.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        loadData();
+/*
         // add item touch helper
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(favourite_view); // set swipe to recyclerview
+*/
 
-        loadData();
-
-        return root;
+        return view;
     }
 
     private void loadData() {
@@ -113,16 +115,18 @@ public class FavoritesFragment extends Fragment {
                                 //adding the adapter to listview
                                 favourite_view.setAdapter(adapter);
 
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             //displaying the error in toast if occurrs
-                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "no games on favorite list", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -132,13 +136,20 @@ public class FavoritesFragment extends Fragment {
             //adding the string request to request queue
             requestQueue.add(request);
 
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    50000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS));
+
         } finally {
             if (cursor != null && cursor.isClosed())
                 cursor.close();
             db.close();
         }
-    }
 
+
+    }
+/*
     // remove item after swipe
     private ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
@@ -157,5 +168,5 @@ public class FavoritesFragment extends Fragment {
             }
         }
     };
-
+*/
 }

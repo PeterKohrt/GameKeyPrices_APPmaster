@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -74,7 +75,8 @@ public class DealsFragment extends Fragment {
         mCountry = (MainActivity) getActivity();
         String get_mCountryFromMain = mCountry.country;
 
-        if (mCountry.equals("USA")){iCountry="US";iRegion="us";}
+        if (mCountry.equals("US")){iCountry="US";iRegion="us";}
+        if (mCountry.equals(" US")){iCountry="US";iRegion="us";}
         if (mCountry.equals("Deutschland")){iCountry="DE";iRegion="eu1";}
         else {iCountry="DE";iRegion="eu1";}
 
@@ -206,6 +208,11 @@ public class DealsFragment extends Fragment {
 
         //adding the string request to request queue
         requestQueue.add(stringRequest);
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                50000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS));
 
     }
 }
