@@ -117,7 +117,9 @@ public class ActionFragment extends Fragment {
                                 String shop = gArray.getJSONObject("price").getString("store");
                                 String plain = list[i];
 
-                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain)); //CREATE ITEMS
+                                String shopLink = gArray.getJSONObject("price").getString("url");
+
+                                game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain, shopLink)); //CREATE ITEMS
                             }
 
                             //creating custom adapter object

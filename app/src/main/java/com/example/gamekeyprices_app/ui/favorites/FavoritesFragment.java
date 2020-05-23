@@ -67,7 +67,6 @@ public class FavoritesFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(favourite_view); // set swipe to recyclerview
 */
-
         return view;
     }
 
@@ -83,7 +82,7 @@ public class FavoritesFragment extends Fragment {
         try {
             // JSON URL WHILE
             while (cursor.moveToNext()) {
-                String request_Plain = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));   //TODO 1 Request only + IF ZERO / ONE / TWO OR MORE ITEMS
+                String request_Plain = cursor.getString(cursor.getColumnIndex(FavDB.KEY_ID));
                 String image = cursor.getString(cursor.getColumnIndex(FavDB.ITEM_IMAGE));
                 String gameTitle = cursor.getString(cursor.getColumnIndex(FavDB.GAME_TITLE));
                 JSON_URL = JSON_URL + request_Plain + ",";
@@ -117,7 +116,10 @@ public class FavoritesFragment extends Fragment {
                                     String cheapest_shop_now = priceObj.getString("store");
                                     String historical_price_low = lowPriceObj.getString("price")  + " " + currency;
 
-                                    favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i)));
+                                    String shopLink = priceObj.getString("url");
+
+                                    favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i), shopLink));
+                                    //favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i));
                                 }
 
                                 //creating custom adapter object

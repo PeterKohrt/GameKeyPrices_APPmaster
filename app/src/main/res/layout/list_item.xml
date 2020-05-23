@@ -22,6 +22,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/url_field2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:autoLink="web"
+                android:clickable="true"
+                android:gravity="center"
+                android:textColorLink="@android:color/transparent"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/cheapest_shop_now"
+                app:layout_constraintEnd_toEndOf="@+id/cheapest_shop_now"
+                app:layout_constraintStart_toStartOf="@+id/cheapest_shop_now"
+                app:layout_constraintTop_toTopOf="@+id/cheapest_shop_now" />
+
             <ViewAnimator
                 android:id="@+id/split_card_view"
                 android:layout_width="wrap_content"

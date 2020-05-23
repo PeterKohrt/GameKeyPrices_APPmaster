@@ -109,12 +109,10 @@ public class DealsFragment extends Fragment {
                                 String price_new = dealObject.getString("price_new") + " " + currency;
                                 String cut = dealObject.getString("price_cut")+" %";
                                 String plain = dealObject.getString("plain");
-
                                 String shopLink = dealObject.getJSONObject("urls").getString("buy");
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
-
 
                                 //date is unix timestamp -> format in date-only - if/else cause respond can be "null"
                                 String expire_string = dealObject.getString("expiry");

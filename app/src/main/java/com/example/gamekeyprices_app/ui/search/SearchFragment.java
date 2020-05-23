@@ -115,13 +115,15 @@ public class SearchFragment extends Fragment {
 
                                 String gameTitle = searchObject.getString("title");
                                 String plain = searchObject.getString("plain");
+                                String shopLink = searchObject.getJSONObject("urls").getString("buy");
+
 
 
                                 if (i == searchArray.length())
                                 plainList = plainList + searchObject.getString("plain");
                                 else plainList = plainList + searchObject.getString("plain") + ",";
 
-                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0", plain));
+                                plainMap.put(searchObject.getString("plain"),new ListItem("", gameTitle, "", "", "", "0", plain, shopLink));
                             }
 
                             // if response contains no results

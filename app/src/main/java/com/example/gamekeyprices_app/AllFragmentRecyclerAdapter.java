@@ -80,6 +80,10 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         String game_image_data = all_list.get(position).getImage_url();
         holder.setGameImage(game_image_data);
 
+        //BIND URL
+        String shop_URL = all_list.get(position).getShopLink();
+        holder.setURL(shop_URL);
+
     }
 
     // METHOD for VIEWHOLDER
@@ -93,6 +97,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         private TextView price_historic_low;
         private TextView price_now_low;
         private TextView cheapest_shop_now;
+        private TextView deal_url;
         private Button favBtn;
 
         // SET mVIEW
@@ -154,6 +159,12 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         public void setCheapestShopNow(String cheapestShopNow){
             cheapest_shop_now = mView.findViewById(R.id.cheapest_shop_now);
             cheapest_shop_now.setText(cheapestShopNow);
+        }
+
+        //SET URL
+        public void setURL(String shopURL){
+            deal_url = mView.findViewById(R.id.url_field2);
+            deal_url.setText(shopURL);
         }
     }
 
