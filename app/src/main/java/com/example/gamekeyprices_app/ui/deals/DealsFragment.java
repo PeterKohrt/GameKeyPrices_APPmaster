@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -103,16 +105,19 @@ public class DealsFragment extends Fragment {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old") + " " + currency;      //TODO DEPENDS ON REGION SET
-                                String price_new = dealObject.getString("price_new") + " " + currency;      //TODO DEPENDS ON REGION SET
+                                String price_old = dealObject.getString("price_old") + " " + currency;
+                                String price_new = dealObject.getString("price_new") + " " + currency;
                                 String cut = dealObject.getString("price_cut")+" %";
                                 String plain = dealObject.getString("plain");
+
+                                String shopLink = dealObject.getJSONObject("urls").getString("buy");
 
                                 // shop is an separate object in list-array-object -> getJSONObject("shop) ...
                                 String shop = dealObject.getJSONObject("shop").getString("name");
 
+
                                 //date is unix timestamp -> format in date-only - if/else cause respond can be "null"
-                                String expire_string =  dealObject.getString("expiry");
+                                String expire_string = dealObject.getString("expiry");
                                 String output_expiry = "";
 
                                 //expiry-JSON = "null"
@@ -130,12 +135,11 @@ public class DealsFragment extends Fragment {
                                     output_expiry = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
                                 }
 
-
                                 if (i == gameDealArray.length())
                                     plainList = plainList + dealObject.getString("plain");
                                 else plainList = plainList + dealObject.getString("plain") + ",";
 
-                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain));
+                                plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain, shopLink));
 
                             }
 
@@ -208,5 +212,7 @@ public class DealsFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_TIMEOUT_MS));
 
     }
+
+
 }
 

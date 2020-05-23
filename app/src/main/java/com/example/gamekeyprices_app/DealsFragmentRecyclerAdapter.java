@@ -89,6 +89,10 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         // BIND EXPIRE
         String expire_data = deals_list.get(position).getExpire();
         holder.setExpire(expire_data);
+
+        //BIND URL
+        String shop_URL = deals_list.get(position).getShoplink();
+        holder.setURL(shop_URL);
     }
 
     // METHOD for VIEWHOLDER
@@ -104,6 +108,7 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         private TextView cut;
         private TextView expire;
         private Button favBtn;
+        private TextView deal_url;
 
         // SET mVIEW
         public ViewHolder(@NonNull View itemView) {
@@ -176,6 +181,12 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         public void setExpire(String expireDate){
             expire = mView.findViewById(R.id.expire_value);
             expire.setText(expireDate);
+        }
+
+        //SET URL
+        public void setURL(String shopURL){
+            deal_url = mView.findViewById(R.id.url_field);
+            deal_url.setText(shopURL);
         }
     }
 
