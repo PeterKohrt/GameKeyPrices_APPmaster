@@ -102,7 +102,7 @@ public class FPSFragment extends Fragment {
 
                             //Helper Array to get ID for Game-Image-URL
                             String[] picid = {"546560","239140","548430","379720","362890","636480","434570","418370","222880","976730"};
-                            String[] title = {"","","","","","","","","",""};
+                            String[] title = {"Half-Life: Alyx","Dying Light","Deep Rock Galactic","DOOM","Black Mesa","Ravenfield","Blood and Bacon","RESIDENT EVIL 7 biohazard","Insurgency","Halo: The Master Chief Collection"};
 
                             for (int i = 0; i<fpsList.length; i++) {
 
