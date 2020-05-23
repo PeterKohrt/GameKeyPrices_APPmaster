@@ -95,8 +95,6 @@ public class SearchFragment extends Fragment {
     private void loadQuery(String request_plain, final String country, final String region) {
          String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&limit=50&q="+request_plain+country+region; //TODO DEPENDS ON REGION SET
 
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
                     @Override

@@ -24,16 +24,13 @@ import com.android.volley.toolbox.Volley;
 import com.example.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.example.gamekeyprices_app.FavDB;
 import com.example.gamekeyprices_app.ListItem;
+import com.example.gamekeyprices_app.MainActivity;
 import com.example.gamekeyprices_app.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class FavoritesFragment extends Fragment {
 
@@ -47,6 +44,9 @@ public class FavoritesFragment extends Fragment {
     private ArrayList<String> plainListTitle = new ArrayList<String>();
     private int ArrayListLength = 0;
 
+    public MainActivity iCountry;
+    public MainActivity iRegion;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
@@ -56,7 +56,12 @@ public class FavoritesFragment extends Fragment {
         //favourite_view.setHasFixedSize(true);
         favourite_view.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        loadData();
+        iCountry = (MainActivity) getActivity();
+        String setCountry = iCountry.mCountryFromMain;
+        iRegion = (MainActivity) getActivity();
+        String setRegion = iRegion.mRegionFromMain;
+
+        loadData(setCountry,setRegion);
 /*
         // add item touch helper
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
@@ -66,14 +71,15 @@ public class FavoritesFragment extends Fragment {
         return view;
     }
 
-    private void loadData() {
+    private void loadData(String country, String region) {
         if (favItemList != null) {
             favItemList.clear();
         }
         SQLiteDatabase db = favDB.getReadableDatabase();
         Cursor cursor = favDB.select_all_favorite_list();
 
-        String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&region=eu1&country=DE&plains=";
+        String JSON_URL = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains=";
+
         try {
             // JSON URL WHILE
             while (cursor.moveToNext()) {
@@ -89,8 +95,9 @@ public class FavoritesFragment extends Fragment {
             }
 
             JSON_URL = JSON_URL.substring(0, JSON_URL.length() -1);
+            String JSON_URLRegionized = JSON_URL+country+region;
 
-            StringRequest request = new StringRequest(StringRequest.Method.GET, JSON_URL,
+            StringRequest request = new StringRequest(StringRequest.Method.GET, JSON_URLRegionized,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -98,14 +105,17 @@ public class FavoritesFragment extends Fragment {
                                 JSONObject obj = new JSONObject(response);
                                 JSONObject data = obj.getJSONObject("data");
 
+                                JSONObject obj_meta = obj.getJSONObject(".meta");
+                                String currency = obj_meta.getString("currency");
+
                                 for(int i = 0; i<ArrayListLength; i++) {
                                     JSONObject favObj = data.getJSONObject(plainList.get(i));
                                     JSONObject priceObj = favObj.getJSONObject("price");
                                     JSONObject lowPriceObj = favObj.optJSONObject("lowest");
 
-                                    String lowest_price_now = priceObj.getString("price");
+                                    String lowest_price_now = priceObj.getString("price") + " " + currency;
                                     String cheapest_shop_now = priceObj.getString("store");
-                                    String historical_price_low = lowPriceObj.getString("price");
+                                    String historical_price_low = lowPriceObj.getString("price")  + " " + currency;
 
                                     favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i)));
                                 }

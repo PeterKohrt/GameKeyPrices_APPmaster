@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        
+
+
+
     }
 
     @Override
@@ -140,16 +142,74 @@ public class MainActivity extends AppCompatActivity {
                                 country = addresses.get(0).getCountryCode();
                                 mCountryFromMain = "&country=" + country;
                                 mRegionFromMain = "";
-                                if(mCountryFromMain.equals("&country=US")){mRegionFromMain="&region=us";}
-                                if(mCountryFromMain.equals("&country=DE")){mRegionFromMain="&region=eu1";}
 
-                                Toast.makeText(getApplicationContext(), mCountryFromMain, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getApplicationContext(), mRegionFromMain, Toast.LENGTH_SHORT).show();
+                                //EU1
+                                if(mCountryFromMain.equals("&country=AL")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=AD")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=AT")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=BE")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=DK")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=FI")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=FR")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=DE")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=IE")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=LI")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=LU")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=MK")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=NL")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=SE")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=CH")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+
+                                //EU2
+                                if(mCountryFromMain.equals("&country=BA")){mRegionFromMain="&region=eu2";Toast.makeText(getApplicationContext(), "country: " + country + " region: ", Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=BG")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=HR")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=CY")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=CZ")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=GR")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=HU")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=IT")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=MT")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=MC")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=ME")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=NO")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=PL")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=PT")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=RO")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=SM")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=RS")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=SK")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=SI")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=ES")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=VA")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=EE")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=LV")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                if(mCountryFromMain.equals("&country=LT")){mRegionFromMain="&region=eu2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+
+                                //US
+                                if(mCountryFromMain.equals("&country=US")){mRegionFromMain="&region=us";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //GB
+                                if(mCountryFromMain.equals("&country=GB")){mRegionFromMain="&region=uk";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //CA
+                                if(mCountryFromMain.equals("&country=CA")){mRegionFromMain="&region=ca";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //BR
+                                if(mCountryFromMain.equals("&country=BR")){mRegionFromMain="&region=br2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //AU
+                                if(mCountryFromMain.equals("&country=AU")){mRegionFromMain="&region=au2";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //RU
+                                if(mCountryFromMain.equals("&country=RU")){mRegionFromMain="&region=ru";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //TR
+                                if(mCountryFromMain.equals("&country=TR")){mRegionFromMain="&region=tr";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+                                //CN
+                                if(mCountryFromMain.equals("&country=CN")){mRegionFromMain="&region=cn";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
+
+                                else {mRegionFromMain="";}
+
 
                             }
                             catch (IOException e){
                                 e.printStackTrace();
-                                Toast.makeText(MainActivity.this, "Error: " + e, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Error: " + e, Toast.LENGTH_LONG).show();
                             }
                         }
                     }
