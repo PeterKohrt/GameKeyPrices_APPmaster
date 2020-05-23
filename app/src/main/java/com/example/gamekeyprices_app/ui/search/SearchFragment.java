@@ -23,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.example.gamekeyprices_app.ListItem;
+import com.example.gamekeyprices_app.MainActivity;
 import com.example.gamekeyprices_app.R;
 import com.example.gamekeyprices_app.ui.all.AllViewModel;
 
@@ -46,11 +47,20 @@ public class SearchFragment extends Fragment {
     private Map<String,ListItem> plainMap;
     private String plainList;
 
+    public MainActivity iCountry;
+    public MainActivity iRegion;
+
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        iCountry = (MainActivity) getActivity();
+        final String setCountry = iCountry.mCountryFromMain;
+        iRegion = (MainActivity) getActivity();
+        final String setRegion = iRegion.mRegionFromMain;
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         // INITIALIZE LAYOUT
@@ -69,7 +79,7 @@ public class SearchFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 mSearchText = query; // contains user input
                 Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
-                loadQuery(mSearchText); //gives user input as string to loadQuery for Request
+                loadQuery(mSearchText, setCountry, setRegion); //gives user input as string to loadQuery for Request
                 return false; }
 
             @Override
@@ -82,8 +92,10 @@ public class SearchFragment extends Fragment {
         return view; }
 
 
-    private void loadQuery(String request_plain) {
-         String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&region=eu1&country=DE&limit=50&q="+request_plain; //TODO DEPENDS ON REGION SET
+    private void loadQuery(String request_plain, final String country, final String region) {
+         String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&limit=50&q="+request_plain+country+region; //TODO DEPENDS ON REGION SET
+
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
                 new Response.Listener<String>() {
@@ -135,7 +147,7 @@ public class SearchFragment extends Fragment {
                                                         plainMap.get(plain).image_url = plainSearchResult.getString("image");
                                                     }
 
-                                                    String INNER_JSON_REQUEST2 = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
+                                                    String INNER_JSON_REQUEST2 = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList+country+region;
 
                                                     StringRequest stringRequest2 = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST2,
                                                             new Response.Listener<String>() {
@@ -144,10 +156,14 @@ public class SearchFragment extends Fragment {
                                                                     try {
                                                                         JSONObject obj = new JSONObject(response); //Complete JSONObject
                                                                         JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
+
+                                                                        JSONObject obj_meta = obj.getJSONObject(".meta");
+                                                                        String currency = obj_meta.getString("currency");
+
                                                                         for (String plain : plainMap.keySet()){
                                                                             JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
-                                                                            plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" €";
-                                                                            plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" €";
+                                                                            plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" "+currency;
+                                                                            plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" "+currency;
                                                                             plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
                                                                             plainMap.get(plain).favStatus = "0";
                                                                         }
