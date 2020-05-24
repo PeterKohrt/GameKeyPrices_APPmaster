@@ -50,6 +50,8 @@ public class SearchFragment extends Fragment {
     public MainActivity iCountry;
     public MainActivity iRegion;
 
+    private ProgressBar search_progressbar;
+
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
@@ -72,24 +74,36 @@ public class SearchFragment extends Fragment {
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(search_list, getContext());
         search_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         search_list_view.setAdapter(allFragmentRecyclerAdapter);
+        search_progressbar = view.findViewById(R.id.progressBar_search);
+
+        search_progressbar.setVisibility(View.INVISIBLE);
+
 
         // On Query Text Listener -> ON Text Submit is Query loaded
         search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 mSearchText = query; // contains user input
                 Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
+                search_progressbar.setVisibility(View.VISIBLE);
+
                 loadQuery(mSearchText, setCountry, setRegion); //gives user input as string to loadQuery for Request
-                return false; }
+
+                return false;
+            }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 search_list.clear();  //clear text when text is changed
+                search_progressbar.setVisibility(View.INVISIBLE);
                 return false; }});
 
 
+
         // Inflate the layout for this fragment
-        return view; }
+        return view;
+    }
 
 
     private void loadQuery(String request_plain, final String country, final String region) {
@@ -126,7 +140,9 @@ public class SearchFragment extends Fragment {
 
                             // if response contains no results
                             if (searchArray.length() <= 1){
+                                search_progressbar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(search_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
+
                             }
                             // if there are results
                             else {
@@ -168,6 +184,8 @@ public class SearchFragment extends Fragment {
                                                                         }
                                                                         //creating custom adapter object
                                                                         AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+                                                                        //MAKE PROGRESS INVISIBLE
+                                                                        search_progressbar.setVisibility(View.INVISIBLE);
                                                                         //adding the adapter to listview
                                                                         search_list_view.setAdapter(adapter);
 
@@ -223,7 +241,8 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //displaying the error in toast if occurrs
-                        Toast.makeText(getActivity().getApplicationContext(), "error: timeout", Toast.LENGTH_SHORT).show();     //TODO FIX TIMEOUT
+                        Toast.makeText(getActivity().getApplicationContext(), "error: timeout", Toast.LENGTH_SHORT).show();
+                        search_progressbar.setVisibility(View.INVISIBLE);
                     }
                 });
         //creating a request queue
