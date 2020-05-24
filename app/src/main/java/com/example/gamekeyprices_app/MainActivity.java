@@ -9,6 +9,8 @@ import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private double longitude;
     private double latitude;
@@ -46,11 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public String mCountryFromMain;
     public String mRegionFromMain;
 
+    private ProgressBar start_progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        check_permissions();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        start_progressBar = findViewById(R.id.progressBar_start);
 
+        check_permissions();
 
     }
 
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 mCountryFromMain="&country=US";mRegionFromMain="&region=us";
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
+                start_progressBar.setVisibility(View.INVISIBLE);
 
             }
 
@@ -117,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // GET CURRENT CITY AND COUNTRY
     private void getCurrentLocation() {
+
+        start_progressBar.setVisibility(View.VISIBLE);
 
         final LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
@@ -136,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                             longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
 
                             // GET CITY AND COUNTRY NAME
-
                             try {
                                 Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -204,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                                 //CN
                                 if(mCountryFromMain.equals("&country=CN")){mRegionFromMain="&region=cn";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
 
+                                start_progressBar.setVisibility(View.INVISIBLE);
                             }
                             catch (IOException e){
                                 e.printStackTrace();
