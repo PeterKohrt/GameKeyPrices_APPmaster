@@ -51,6 +51,6 @@ public class DealsItem {
     //GET PLAIN
     public String getPlain() {return plain;}
 
-    //GET SHOPLINK
-    public String getShoplink() {return shoplink;}
+    //GET SHOP_LINK
+    public String getShopLink() {return shoplink;}
 }

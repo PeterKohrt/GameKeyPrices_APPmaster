@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RacingFragment extends Fragment {
+    //works like every category fragment -> comments like in action
 
     public MainActivity iCountry;
     public MainActivity iRegion;
@@ -38,22 +40,27 @@ public class RacingFragment extends Fragment {
     private List<ListItem> game_list;
     private RecyclerView game_list_view;
 
+    private ProgressBar racing_progressbar;
+
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_action, container, false);
+        View view=inflater.inflate(R.layout.fragment_racing, container, false);
 
         // INITIALIZE LAYOUT
         game_list = new ArrayList<>();
-        game_list_view = view.findViewById(R.id.action_recycler);
+        game_list_view = view.findViewById(R.id.racing_recycler);
 
         // INITIALIZE RecyclerAdapter
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list, getContext());
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
+
+        racing_progressbar = view.findViewById(R.id.progressBar_racing);
+        racing_progressbar.setVisibility(View.VISIBLE);
 
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
@@ -122,8 +129,14 @@ public class RacingFragment extends Fragment {
 
                                 //set plain titel better than no title atm
                                 String gameTitle = title[i];
-                                String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
-                                String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
+
+                                //String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
+                                //String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
+                                Double price_now_low_double = gArray.getJSONObject("price").getDouble("price");
+                                String price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
+                                Double price_historic_low_double = gArray.getJSONObject("lowest").getDouble("price");
+                                String price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
+
                                 String shop = gArray.getJSONObject("price").getString("store");
                                 String plain = list[i];
 
@@ -131,13 +144,14 @@ public class RacingFragment extends Fragment {
 
                                 game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain, shopLink)); //CREATE ITEMS
                             }
-
+                            racing_progressbar.setVisibility(View.INVISIBLE);
                             //creating custom adapter object
                             AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(game_list, getContext());
                             //adding the adapter to listview
                             game_list_view.setAdapter(adapter);
 
                         } catch (JSONException e) {
+                            racing_progressbar.setVisibility(View.INVISIBLE);
                             e.printStackTrace();
                         }
 
@@ -147,6 +161,7 @@ public class RacingFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        racing_progressbar.setVisibility(View.INVISIBLE);
                         //displaying the error in toast if occurrs
                         Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }

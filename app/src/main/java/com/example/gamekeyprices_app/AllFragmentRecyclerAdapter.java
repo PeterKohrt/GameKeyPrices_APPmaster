@@ -47,7 +47,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         // INFLATE LAYOUT
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
 
-        //INITIALIZE CONTENT
+        // INITIALIZE CONTENT
         mCtx = parent.getContext();
 
         return new ViewHolder(view);
@@ -56,7 +56,8 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final ListItem listItem = all_list.get(position);
-        holder.setIsRecyclable(false); //TODO setIsRecycable not the best but easy way
+        //TODO setIsRecycable not the best but easy way
+        holder.setIsRecyclable(false);
 
         readCursorData(listItem, holder);
 
@@ -161,7 +162,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
             cheapest_shop_now.setText(cheapestShopNow);
         }
 
-        //SET URL
+        // SET URL
         public void setURL(String shopURL){
             deal_url = mView.findViewById(R.id.url_field2);
             deal_url.setText(shopURL);
@@ -182,6 +183,7 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
         editor.apply();
     }
 
+    //like in DealsFragmentRecyclerAdapter
     private void readCursorData(ListItem listItem, AllFragmentRecyclerAdapter.ViewHolder viewHolder) {
         Cursor cursor = null;
         SQLiteDatabase db = favDB.getReadableDatabase();
@@ -191,7 +193,6 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
                 String item_fav_staus = cursor.getString(cursor.getColumnIndex(FavDB.FAVORITE_STATUS));
                 listItem.setFavStatus(item_fav_staus);
 
-                //check fav status
                 if (item_fav_staus != null && item_fav_staus.equals("1")) {
                     viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
                 } else if (item_fav_staus != null && item_fav_staus.equals("0")) {
@@ -200,8 +201,8 @@ public class AllFragmentRecyclerAdapter extends RecyclerView.Adapter <AllFragmen
             }
         }
         catch (Exception e){
-            //andere exception
         }
+
         finally {
             if (cursor != null && cursor.isClosed())
                 cursor.close();

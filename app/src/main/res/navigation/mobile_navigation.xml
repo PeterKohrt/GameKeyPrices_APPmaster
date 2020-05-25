@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_category">
+    app:startDestination="@id/nav_startpage">
 
     <fragment
         android:id="@+id/nav_favorites"
@@ -17,7 +17,6 @@
         android:label="@string/menu_deals"
         tools:layout="@layout/fragment_deals" />
 
-
     <fragment
         android:id="@+id/nav_search"
         android:name="com.example.gamekeyprices_app.ui.search.SearchFragment"
@@ -25,15 +24,10 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/nav_all"
-        android:name="com.example.gamekeyprices_app.ui.all.AllFragment"
-        android:label="@string/menu_all"
-        tools:layout="@layout/fragment_all" />
-
-    <fragment
-        android:id="@+id/nav_category"
-        android:name="com.example.gamekeyprices_app.ui.category.CategoryFragment"
-        android:label="@string/menu_category" />
+        android:id="@+id/nav_startpage"
+        android:name="com.example.gamekeyprices_app.ui.category.StartpageFragment"
+        android:label="@string/app_name"
+    />
 
     <fragment
         android:id="@+id/nav_action"
@@ -63,7 +57,7 @@
         tools:layout="@layout/fragment_management" />
     <fragment
         android:id="@+id/nav_mmo"
-        android:name="com.example.gamekeyprices_app.ui.category.mmorpg.MMOFragment"
+        android:name="com.example.gamekeyprices_app.ui.category.mmo.MMOFragment"
         android:label="@string/menu_mmo"
         tools:layout="@layout/fragment_mmo" />
     <fragment

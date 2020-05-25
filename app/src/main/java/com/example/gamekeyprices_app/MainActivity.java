@@ -9,6 +9,8 @@ import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,11 +36,11 @@ import java.util.Locale;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-// API_KEY 0dfaaa8b017e516c145a7834bc386864fcbd06f5
-
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+
+    //variables for user mobility -> request depends on determined country
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     private double longitude;
     private double latitude;
@@ -46,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
     public String mCountryFromMain;
     public String mRegionFromMain;
 
+    //progressbar on app start
+    private ProgressBar start_progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        check_permissions();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -61,14 +63,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         Menu menu = navigationView.getMenu();
+
         // changes color of menu title
-        MenuItem category = menu.findItem(R.id.nav_category);
+        MenuItem category = menu.findItem(R.id.nav_spotlight);
         SpannableString s = new SpannableString(category.getTitle());
         s.setSpan(new TextAppearanceSpan(this, R.style.MenuTitleStyle), 0, s.length(), 0);
         category.setTitle(s);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_favorites, R.id.nav_deals, R.id.nav_search, R.id.nav_all, R.id.nav_category, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
+                R.id.nav_favorites, R.id.nav_deals, R.id.nav_search, R.id.nav_startpage, R.id.nav_action, R.id.nav_adventure, R.id.nav_fps,
                 R.id.nav_horror, R.id.nav_management, R.id.nav_mmo, R.id.nav_racing, R.id.nav_rpg, R.id.nav_sports, R.id.nav_strategy)
                 .setDrawerLayout(drawer)
                 .build();
@@ -76,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //init progressbar
+        start_progressBar = findViewById(R.id.progressBar_start);
 
+        check_permissions();
 
     }
 
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    // CHECK LOCATION PERMISSIONS
+    // check location permissions
     private void check_permissions() {
 
         if(ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
@@ -98,25 +104,31 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    // EVALUATE PERMISSION REQUEST RESULTS
+    // actions depending on result of location permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_CODE_LOCATION_PERMISSION && grantResults.length >0)
         {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //determine country and region
                getCurrentLocation();
             } else {
+                //set default to US us
                 mCountryFromMain="&country=US";mRegionFromMain="&region=us";
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
+                start_progressBar.setVisibility(View.INVISIBLE);
 
             }
 
         }
 
     }
-    // GET CURRENT CITY AND COUNTRY
+    // get current country and location
     private void getCurrentLocation() {
+
+        //until position is not defined progressbar is visible
+        start_progressBar.setVisibility(View.VISIBLE);
 
         final LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
@@ -135,8 +147,7 @@ public class MainActivity extends AppCompatActivity {
                             latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
                             longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
 
-                            // GET CITY AND COUNTRY NAME
-
+                            // get country in country code
                             try {
                                 Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                                 List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
@@ -144,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                                 mCountryFromMain = "&country=" + country;
                                 mRegionFromMain = "";
 
+                                //set country and region for requests
                                 //EU1
                                 if(mCountryFromMain.equals("&country=AL")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
                                 if(mCountryFromMain.equals("&country=AD")){mRegionFromMain="&region=eu1";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
@@ -204,6 +216,8 @@ public class MainActivity extends AppCompatActivity {
                                 //CN
                                 if(mCountryFromMain.equals("&country=CN")){mRegionFromMain="&region=cn";String region=mRegionFromMain.substring(8);Toast.makeText(getApplicationContext(), "country: " + country + " region: " + region, Toast.LENGTH_SHORT).show();}
 
+                                //progressbar invisible
+                                start_progressBar.setVisibility(View.INVISIBLE);
                             }
                             catch (IOException e){
                                 e.printStackTrace();

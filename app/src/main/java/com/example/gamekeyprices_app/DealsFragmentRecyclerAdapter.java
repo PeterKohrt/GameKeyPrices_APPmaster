@@ -33,12 +33,13 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
 
     }
 
-    // METHODS FOR ADAPTER
+    //methods for adapter
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         favDB = new FavDB(mCtx);
+
         //create table on first
         SharedPreferences prefs = mCtx.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         boolean firstStart = prefs.getBoolean("firstStart", true);
@@ -46,10 +47,10 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
             createTableOnFirstStart();
         }
 
-        // INFLATE LAYOUT
+        //inflate layout
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deals_item, parent, false);
 
-        //INITIALIZE CONTENT
+        //initialize content
         mCtx = parent.getContext();
 
         return new ViewHolder(view);
@@ -58,7 +59,8 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final DealsItem dealsItem = deals_list.get(position);
-        holder.setIsRecyclable(false); //TODO setIsRecycable not the best but easy way
+        //TODO setIsRecycable not the best but easy way
+        holder.setIsRecyclable(false);
 
         readCursorData(dealsItem, holder);
 
@@ -90,12 +92,12 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         String expire_data = deals_list.get(position).getExpire();
         holder.setExpire(expire_data);
 
-        //BIND URL
-        String shop_URL = deals_list.get(position).getShoplink();
+        // BIND URL
+        String shop_URL = deals_list.get(position).getShopLink();
         holder.setURL(shop_URL);
     }
 
-    // METHOD for VIEWHOLDER
+    // METHOD FOR VIEWHOLDER
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View mView;
@@ -210,10 +212,11 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
         try {
             cursor = favDB.read_all_data(dealsItem.getPlain());
             while (cursor.moveToNext()) {
+                //reading db column for column
                 String item_fav_staus = cursor.getString(cursor.getColumnIndex(FavDB.FAVORITE_STATUS));
                 dealsItem.setFavStatus(item_fav_staus);
 
-                //check fav status
+                //check fav status and depending on that set icon
                 if (item_fav_staus != null && item_fav_staus.equals("1")) {
                     viewHolder.favBtn.setBackgroundResource(R.drawable.fav_icon_checked);
                 } else if (item_fav_staus != null && item_fav_staus.equals("0")) {
@@ -222,8 +225,8 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
             }
         }
         catch (Exception e){
-            //andere exception
         }
+
         finally {
             if (cursor != null && cursor.isClosed())
                 cursor.close();

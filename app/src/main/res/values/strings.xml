@@ -10,9 +10,8 @@
     <string name="menu_favorites">Favorites</string>
     <string name="menu_deals">Deals</string>
     <string name="menu_search">Search</string>
-    <string name="menu_all">All</string>
 
-    <string name="menu_category">Spotlight</string>
+    <string name="menu_spotlight">Spotlight</string>
     <string name="menu_action">Action</string>
     <string name="menu_adventure">Adventure</string>
     <string name="menu_fps">FPS</string>
@@ -23,6 +22,11 @@
     <string name="menu_rpg">RPG</string>
     <string name="menu_sports">Sports</string>
     <string name="menu_strategy">Strategy</string>
+
+    <string name="you">YOU</string>
+    <string name="track">TRACK</string>
+    <string name="heartlogo">heartLogo</string>
+    <string name="url">itad.docs.apiary.io</string>
 
     <string name="game_title">Game Title</string>
     <string name="historic_low">LOW</string>

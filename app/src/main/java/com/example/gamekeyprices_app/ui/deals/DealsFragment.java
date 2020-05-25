@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,13 +42,16 @@ import java.util.Map;
 
 public class DealsFragment extends Fragment {
 
+    //variables for location
     public MainActivity iCountry;
     public MainActivity iRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
 
+    private ProgressBar deals_progressbar;
 
+    //variable for request
     private Map<String, DealsItem> plainMap;
 
     // ADAPTER
@@ -59,7 +61,7 @@ public class DealsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        //SET VIEW
+        // SET VIEW
         View view = inflater.inflate(R.layout.fragment_deals, container, false);
 
         // INITIALIZE LAYOUT
@@ -70,19 +72,25 @@ public class DealsFragment extends Fragment {
         dealsFragmentRecyclerAdapter = new DealsFragmentRecyclerAdapter(deals_list, getContext());
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
+        deals_progressbar = view.findViewById(R.id.progressBar_deals);
 
+        deals_progressbar.setVisibility(View.VISIBLE);
+
+        //get country, region from main
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
         iRegion = (MainActivity) getActivity();
         String setRegion = iRegion.mRegionFromMain;
         
-       loadQuery(setCountry, setRegion);
+        loadQuery(setCountry, setRegion);
 
-        // Inflate the layout for this fragment
+        //inflate the layout for this fragment
         return view;
     }
 
     private void loadQuery(String county, String region) {
+        deals_progressbar.setVisibility(View.VISIBLE);
+
         String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=100"+county+region;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -95,7 +103,7 @@ public class DealsFragment extends Fragment {
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
                             JSONArray gameDealArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
 
-                            JSONObject obj_meta = obj.getJSONObject(".meta");
+                            JSONObject obj_meta = obj.getJSONObject(".meta"); //meta info for currency USD EUR ...
                             String currency = obj_meta.getString("currency");
 
                             String plainList = "";
@@ -105,9 +113,14 @@ public class DealsFragment extends Fragment {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old") + " " + currency;
-                                String price_new = dealObject.getString("price_new") + " " + currency;
-                                String cut = dealObject.getString("price_cut")+" %";
+
+                                //Price 2 digits after .
+                                Double price_old_double = dealObject.getDouble("price_old");
+                                String price_old = String.format("%.2f", price_old_double) + " " + currency;
+                                Double price_new_double = dealObject.getDouble("price_new");
+                                String price_new = String.format("%.2f", price_new_double) + " " + currency;
+
+                                String cut = dealObject.getString("price_cut") + " %";
                                 String plain = dealObject.getString("plain");
                                 String shopLink = dealObject.getJSONObject("urls").getString("buy");
 
@@ -138,16 +151,17 @@ public class DealsFragment extends Fragment {
                                 else plainList = plainList + dealObject.getString("plain") + ",";
 
                                 plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain, shopLink));
-
                             }
 
                             // if response contains no results
                             if (gameDealArray.length() <= 1) {
+                                deals_progressbar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(deals_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
                             }
+
                             // if there are results
                             else {
-                                // second request INFO with plains
+                                // second request INFO with plains for image url
                                 String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
                                 StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
@@ -163,10 +177,14 @@ public class DealsFragment extends Fragment {
                                                     }
                                                     //creating custom adapter object
                                                     DealsFragmentRecyclerAdapter adapter = new DealsFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+
+                                                    //make progressbar invisible
+                                                    deals_progressbar.setVisibility(View.INVISIBLE);
                                                     //adding the adapter to listview
                                                     deals_list_view.setAdapter(adapter);
 
                                                 } catch (JSONException e) {
+                                                    deals_progressbar.setVisibility(View.INVISIBLE);
                                                     e.printStackTrace();
                                                 }
                                             }
@@ -174,6 +192,7 @@ public class DealsFragment extends Fragment {
                                         new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
+                                                deals_progressbar.setVisibility(View.INVISIBLE);
                                                 //displaying the error in toast if occurrs
                                                 Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
@@ -185,6 +204,7 @@ public class DealsFragment extends Fragment {
                                 requestQueue.add(stringRequest);
                             }
                         } catch (JSONException e) {
+                            deals_progressbar.setVisibility(View.INVISIBLE);
                             e.printStackTrace();
                         }
 
@@ -204,6 +224,7 @@ public class DealsFragment extends Fragment {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
+        //setting timeout let the server time to respond else the view is maybe empty
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 50000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
