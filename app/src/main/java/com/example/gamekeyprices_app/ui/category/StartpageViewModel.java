@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CategoryViewModel extends ViewModel {
+public class StartpageViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public CategoryViewModel() {
+    public StartpageViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is Category fragment");
+        mText.setValue("This is startpage fragment");
     }
-
     public LiveData<String> getText() {
         return mText;
     }

@@ -77,7 +77,7 @@ public class FavoritesFragment extends Fragment {
 
     private void loadData(String country, String region) {
         if (favItemList != null) {
-            favorites_progressbar.setVisibility(View.INVISIBLE);
+            //favorites_progressbar.setVisibility(View.INVISIBLE);
             favItemList.clear();
         }
         SQLiteDatabase db = favDB.getReadableDatabase();
@@ -171,7 +171,6 @@ public class FavoritesFragment extends Fragment {
                 cursor.close();
             db.close();
         }
-
 
     }
 /*

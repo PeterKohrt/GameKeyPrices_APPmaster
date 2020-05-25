@@ -17,48 +17,42 @@
             android:id="@+id/nav_search"
             android:icon="@android:drawable/ic_menu_search"
             android:title="@string/menu_search" />
-        <!--
-                <item
-                    android:id="@+id/nav_all"
-                    android:icon="@drawable/ic_view_headline_black_24dp"
-                    android:title="@string/menu_all" />
-        -->
 
-    <item
-                    android:id="@+id/nav_category"
-                    android:title="@string/menu_category">
-                    <menu>
-                        <item
-                            android:id="@+id/nav_action"
-                            android:title="@string/menu_action" />
-                        <item
-                            android:id="@+id/nav_adventure"
-                            android:title="@string/menu_adventure" />
-                        <item
-                            android:id="@+id/nav_fps"
-                            android:title="@string/menu_fps" />
-                        <item
-                            android:id="@+id/nav_horror"
-                            android:title="@string/menu_horror" />
-                        <item
-                            android:id="@+id/nav_management"
-                            android:title="@string/menu_management" />
-                        <item
-                            android:id="@+id/nav_mmo"
-                            android:title="@string/menu_mmo" />
-                        <item
-                            android:id="@+id/nav_racing"
-                            android:title="@string/menu_racing" />
-                        <item
-                            android:id="@+id/nav_rpg"
-                            android:title="@string/menu_rpg" />
-                        <item
-                            android:id="@+id/nav_sports"
-                            android:title="@string/menu_sports" />
-                        <item
-                            android:id="@+id/nav_strategy"
-                            android:title="@string/menu_strategy" />
-                    </menu>
-                </item>
+        <item
+            android:id="@+id/nav_spotlight"
+            android:title="@string/menu_spotlight">
+            <menu>
+                <item
+                    android:id="@+id/nav_action"
+                    android:title="@string/menu_action" />
+                <item
+                    android:id="@+id/nav_adventure"
+                    android:title="@string/menu_adventure" />
+                <item
+                    android:id="@+id/nav_fps"
+                    android:title="@string/menu_fps" />
+                <item
+                    android:id="@+id/nav_horror"
+                    android:title="@string/menu_horror" />
+                <item
+                    android:id="@+id/nav_management"
+                    android:title="@string/menu_management" />
+                <item
+                    android:id="@+id/nav_mmo"
+                    android:title="@string/menu_mmo" />
+                <item
+                    android:id="@+id/nav_racing"
+                    android:title="@string/menu_racing" />
+                <item
+                    android:id="@+id/nav_rpg"
+                    android:title="@string/menu_rpg" />
+                <item
+                    android:id="@+id/nav_sports"
+                    android:title="@string/menu_sports" />
+                <item
+                    android:id="@+id/nav_strategy"
+                    android:title="@string/menu_strategy" />
+            </menu>
+        </item>
             </group>
         </menu>

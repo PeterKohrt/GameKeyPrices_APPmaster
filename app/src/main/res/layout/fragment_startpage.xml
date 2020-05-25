@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.category.CategoryFragment">
+    tools:context=".ui.category.StartpageFragment">
 
     <ViewAnimator
         android:id="@+id/splitStartPage"
@@ -40,10 +40,10 @@
         app:layout_constraintTop_toBottomOf="@+id/splitStartPage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/you"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YOU"
+        android:text="@string/you"
         android:textColor="@color/colorWhite"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -54,20 +54,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
-        android:id="@+id/text_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteY="575dp" />
-
-    <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/track"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Track"
+        android:text="@string/track"
         android:textColor="@color/colorWhite"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -77,9 +68,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/heartLogo"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:contentDescription="@string/heartlogo"
         android:src="@drawable/fav_icon_checked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +86,7 @@
         android:autoLink="web"
         android:clickable="true"
         android:contextClickable="true"
-        android:text="itad.docs.apiary.io"
+        android:text="@string/url"
         android:textColorLink="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,5 +103,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/track" />
 </androidx.constraintlayout.widget.ConstraintLayout>
