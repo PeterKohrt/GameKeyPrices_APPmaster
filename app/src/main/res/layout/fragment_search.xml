@@ -51,7 +51,7 @@
         android:progressTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rView"
         app:layout_constraintTop_toTopOf="@+id/rView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

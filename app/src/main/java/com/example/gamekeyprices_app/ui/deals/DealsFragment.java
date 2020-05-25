@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,8 @@ public class DealsFragment extends Fragment {
     private RecyclerView deals_list_view;
 
 
+    private ProgressBar deals_progressbar;
+
     private Map<String, DealsItem> plainMap;
 
     // ADAPTER
@@ -71,6 +74,9 @@ public class DealsFragment extends Fragment {
         dealsFragmentRecyclerAdapter = new DealsFragmentRecyclerAdapter(deals_list, getContext());
         deals_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         deals_list_view.setAdapter(dealsFragmentRecyclerAdapter);
+        deals_progressbar = view.findViewById(R.id.progressBar_deals);
+
+        deals_progressbar.setVisibility(View.VISIBLE);
 
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
@@ -84,6 +90,8 @@ public class DealsFragment extends Fragment {
     }
 
     private void loadQuery(String county, String region) {
+        deals_progressbar.setVisibility(View.VISIBLE);
+
         String JSON_URL = "https://api.isthereanydeal.com/v01/deals/list/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=100"+county+region;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, JSON_URL,
@@ -150,6 +158,7 @@ public class DealsFragment extends Fragment {
 
                             // if response contains no results
                             if (gameDealArray.length() <= 1) {
+                                deals_progressbar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(deals_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
                             }
                             // if there are results
@@ -170,6 +179,9 @@ public class DealsFragment extends Fragment {
                                                     }
                                                     //creating custom adapter object
                                                     DealsFragmentRecyclerAdapter adapter = new DealsFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
+
+                                                    //make progressbar invisible
+                                                    deals_progressbar.setVisibility(View.INVISIBLE);
                                                     //adding the adapter to listview
                                                     deals_list_view.setAdapter(adapter);
 
