@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdventureFragment extends Fragment {
+    //works like every category fragment -> comments like in action
 
     public MainActivity iCountry;
     public MainActivity iRegion;
@@ -130,8 +131,7 @@ public class AdventureFragment extends Fragment {
                                 //set plain titel better than no title atm
                                 String gameTitle = title[i];
 
-                                //String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
-                                //String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
+                                //format price info
                                 Double price_now_low_double = gArray.getJSONObject("price").getDouble("price");
                                 String price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
                                 Double price_historic_low_double = gArray.getJSONObject("lowest").getDouble("price");

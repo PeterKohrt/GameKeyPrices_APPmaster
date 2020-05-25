@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -38,22 +36,22 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DealsFragment extends Fragment {
 
+    //variables for location
     public MainActivity iCountry;
     public MainActivity iRegion;
 
     private List<DealsItem> deals_list;
     private RecyclerView deals_list_view;
 
-
     private ProgressBar deals_progressbar;
 
+    //variable for request
     private Map<String, DealsItem> plainMap;
 
     // ADAPTER
@@ -63,7 +61,7 @@ public class DealsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        //SET VIEW
+        // SET VIEW
         View view = inflater.inflate(R.layout.fragment_deals, container, false);
 
         // INITIALIZE LAYOUT
@@ -78,14 +76,15 @@ public class DealsFragment extends Fragment {
 
         deals_progressbar.setVisibility(View.VISIBLE);
 
+        //get country, region from main
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
         iRegion = (MainActivity) getActivity();
         String setRegion = iRegion.mRegionFromMain;
         
-       loadQuery(setCountry, setRegion);
+        loadQuery(setCountry, setRegion);
 
-        // Inflate the layout for this fragment
+        //inflate the layout for this fragment
         return view;
     }
 
@@ -104,7 +103,7 @@ public class DealsFragment extends Fragment {
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
                             JSONArray gameDealArray = obj_obj.getJSONArray("list"); //only list-Array in Data Object
 
-                            JSONObject obj_meta = obj.getJSONObject(".meta");
+                            JSONObject obj_meta = obj.getJSONObject(".meta"); //meta info for currency USD EUR ...
                             String currency = obj_meta.getString("currency");
 
                             String plainList = "";
@@ -118,11 +117,10 @@ public class DealsFragment extends Fragment {
                                 //Price 2 digits after .
                                 Double price_old_double = dealObject.getDouble("price_old");
                                 String price_old = String.format("%.2f", price_old_double) + " " + currency;
-
                                 Double price_new_double = dealObject.getDouble("price_new");
                                 String price_new = String.format("%.2f", price_new_double) + " " + currency;
 
-                                String cut = dealObject.getString("price_cut")+" %";
+                                String cut = dealObject.getString("price_cut") + " %";
                                 String plain = dealObject.getString("plain");
                                 String shopLink = dealObject.getJSONObject("urls").getString("buy");
 
@@ -153,7 +151,6 @@ public class DealsFragment extends Fragment {
                                 else plainList = plainList + dealObject.getString("plain") + ",";
 
                                 plainMap.put(dealObject.getString("plain"),new DealsItem("", gameTitle, price_old, price_new, shop, cut, output_expiry, "0", plain, shopLink));
-
                             }
 
                             // if response contains no results
@@ -161,9 +158,10 @@ public class DealsFragment extends Fragment {
                                 deals_progressbar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(deals_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
                             }
+
                             // if there are results
                             else {
-                                // second request INFO with plains
+                                // second request INFO with plains for image url
                                 String INNER_JSON_REQUEST = "https://api.isthereanydeal.com/v01/game/info/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList;
 
                                 StringRequest stringRequest = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST,
@@ -226,6 +224,7 @@ public class DealsFragment extends Fragment {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
+        //setting timeout let the server time to respond else the view is maybe empty
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 50000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

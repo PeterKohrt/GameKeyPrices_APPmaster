@@ -32,6 +32,7 @@ import java.util.List;
 
 public class ActionFragment extends Fragment {
 
+    //variables for location
     public MainActivity iCountry;
     public MainActivity iRegion;
 
@@ -39,6 +40,7 @@ public class ActionFragment extends Fragment {
     private List<ListItem> game_list;
     private RecyclerView game_list_view;
 
+    //progressbar variable
     private ProgressBar action_progressbar;
 
     // ADAPTER
@@ -61,6 +63,7 @@ public class ActionFragment extends Fragment {
         action_progressbar = view.findViewById(R.id.progressBar_action);
         action_progressbar.setVisibility(View.VISIBLE);
 
+        //get country, region from main
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
         iRegion = (MainActivity) getActivity();
@@ -68,13 +71,13 @@ public class ActionFragment extends Fragment {
 
         loadQuery(setCountry, setRegion);
 
-        // Inflate the layout for this fragment
+        //inflate the layout for this fragment
         return view;
     }
 
     private void loadQuery(String county, String region) {
 
-        //define STRING for URL GET REQUEST by Plain
+        //define STRING for URL GET REQUEST by Plain - ten preselected 4 each view
         final String g1 = "nierautomata";
         final String g2 = "monsterhunterworld";
         final String g3 = "totalwarthreekingdoms";
@@ -99,7 +102,7 @@ public class ActionFragment extends Fragment {
                             JSONObject obj = new JSONObject(response); //Complete JSONObject
                             JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
 
-                            JSONObject obj_meta = obj.getJSONObject(".meta");
+                            JSONObject obj_meta = obj.getJSONObject(".meta"); //meta info for currency USD EUR ...
                             String currency = obj_meta.getString("currency");
 
                             //Helper Array to get through JSON OBJECTS
@@ -116,23 +119,24 @@ public class ActionFragment extends Fragment {
                                 //add ID to Game-Image-URL
                                 String game_image_url = "https://steamcdn-a.akamaihd.net/steam/apps/"+picid[i]+"/header.jpg";
 
-                                //set plain titel better than no title atm
+                                //set plain title better than no title atm
                                 String gameTitle = title[i];
 
-                               // String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
-                               // String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
+                                //format price info
                                 Double price_now_low_double = gArray.getJSONObject("price").getDouble("price");
                                 String price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
                                 Double price_historic_low_double = gArray.getJSONObject("lowest").getDouble("price");
                                 String price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
 
+                                //shop in extra object (url and name) so get json obj price first
                                 String shop = gArray.getJSONObject("price").getString("store");
-                                String plain = list[i];
-
                                 String shopLink = gArray.getJSONObject("price").getString("url");
+
+                                String plain = list[i];
 
                                 game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain, shopLink)); //CREATE ITEMS
                             }
+                            //make progressbar invisible
                             action_progressbar.setVisibility(View.INVISIBLE);
                             //creating custom adapter object
                             AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(game_list, getContext());
@@ -140,6 +144,7 @@ public class ActionFragment extends Fragment {
                             game_list_view.setAdapter(adapter);
 
                         } catch (JSONException e) {
+                            //make progressbar invisible
                             action_progressbar.setVisibility(View.INVISIBLE);
                             e.printStackTrace();
                         }
@@ -150,6 +155,7 @@ public class ActionFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        //make progressbar invisible
                         action_progressbar.setVisibility(View.INVISIBLE);
                         //displaying the error in toast if occurrs
                         Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();

@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.category.rpg.RPGFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rpg_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <ProgressBar
         android:id="@+id/progressBar_rpg"
         style="@style/Widget.AppCompat.ProgressBar"
@@ -24,10 +29,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rpg_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

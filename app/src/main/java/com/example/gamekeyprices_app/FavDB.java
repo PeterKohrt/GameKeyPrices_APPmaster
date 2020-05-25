@@ -9,6 +9,7 @@ import android.util.Log;
 
 public class FavDB extends SQLiteOpenHelper {
 
+    //sets what table contains
     private static int DB_VERSION = 1;
     private static String DATABASE_NAME = "FavGamesDB";
     private static String TABLE_NAME = "favoriteTable";
@@ -17,7 +18,7 @@ public class FavDB extends SQLiteOpenHelper {
     public static String ITEM_IMAGE = "image";
     public static String FAVORITE_STATUS = "fStatus";
 
-
+    //creates table
     private static String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
             + KEY_ID + " TEXT," + GAME_TITLE+ " TEXT,"
             + ITEM_IMAGE + " TEXT," + FAVORITE_STATUS+" TEXT)";
@@ -70,7 +71,6 @@ public class FavDB extends SQLiteOpenHelper {
     }
 
     // select all favorite list
-
     public Cursor select_all_favorite_list() {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM "+TABLE_NAME+" WHERE "+FAVORITE_STATUS+" ='1'";

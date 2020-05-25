@@ -10,6 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_deals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
         <ProgressBar
             android:id="@+id/progressBar_deals"
             style="@style/Widget.AppCompat.ProgressBar"
@@ -28,13 +35,6 @@
             app:layout_constraintEnd_toEndOf="@+id/fragment_deals"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fragment_deals" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_deals"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

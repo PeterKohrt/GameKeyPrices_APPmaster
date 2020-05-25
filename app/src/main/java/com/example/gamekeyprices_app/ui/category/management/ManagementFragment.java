@@ -31,6 +31,7 @@ package com.example.gamekeyprices_app.ui.category.management;
         import java.util.List;
 
 public class ManagementFragment extends Fragment {
+    //works like every category fragment -> comments like in action
 
     public MainActivity iCountry;
     public MainActivity iRegion;

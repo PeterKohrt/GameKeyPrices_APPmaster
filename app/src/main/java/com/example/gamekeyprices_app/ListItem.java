@@ -43,7 +43,7 @@ public class ListItem {
     //GET PLAIN
     public String getPlain() {return plain;}
 
-    //GET SHOPLINK
+    //GET SHOP_LINK
     public String getShopLink() {return shopLink;}
 
 

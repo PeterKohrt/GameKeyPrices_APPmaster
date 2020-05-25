@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportsFragment extends Fragment {
+    //works like every category fragment -> comments like in action
 
     public MainActivity iCountry;
     public MainActivity iRegion;

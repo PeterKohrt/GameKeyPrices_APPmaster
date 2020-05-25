@@ -1,7 +1,6 @@
 package com.example.gamekeyprices_app.ui.search;
 
 import android.os.Bundle;
-import android.os.Process;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,13 +42,16 @@ public class SearchFragment extends Fragment {
     private RecyclerView search_list_view;
     private SearchView search_View;
 
+    //variables for request - user input - map for requests from start request to inner request
     private String mSearchText;
     private Map<String,ListItem> plainMap;
     private String plainList;
 
+    //variables for location
     public MainActivity iCountry;
     public MainActivity iRegion;
 
+    //progressbar
     private ProgressBar search_progressbar;
 
     // ADAPTER
@@ -58,6 +60,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        //get country, region from main
         iCountry = (MainActivity) getActivity();
         final String setCountry = iCountry.mCountryFromMain;
         iRegion = (MainActivity) getActivity();
@@ -65,6 +68,7 @@ public class SearchFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
         // INITIALIZE LAYOUT
         search_list = new ArrayList<>();
         search_View = view.findViewById(R.id.searchView);
@@ -79,32 +83,37 @@ public class SearchFragment extends Fragment {
         search_progressbar.setVisibility(View.INVISIBLE);
 
 
-        // On Query Text Listener -> ON Text Submit is Query loaded
+        // on Query Text Listener -> ON Text Submit Query is loaded
         search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                mSearchText = query; // contains user input
+                // contains user input
+                mSearchText = query;
                 Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
                 search_progressbar.setVisibility(View.VISIBLE);
 
-                loadQuery(mSearchText, setCountry, setRegion); //gives user input as string to loadQuery for Request
+                //gives user input as string to loadQuery for Request
+                loadQuery(mSearchText, setCountry, setRegion);
 
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search_list.clear();  //clear text when text is changed
+                //clear list when text is changed
+                search_list.clear();
                 search_progressbar.setVisibility(View.INVISIBLE);
-                return false; }});
-
-
+                //reset view
+                AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(search_list, getContext());
+                search_list_view.setAdapter(adapter);
+                return false;
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
     }
-
 
     private void loadQuery(String request_plain, final String country, final String region) {
          String JSON_URL = "https://api.isthereanydeal.com/v01/search/search/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&limit=30&limit=100&q="+request_plain+country+region; //TODO DEPENDS ON REGION SET
@@ -130,7 +139,7 @@ public class SearchFragment extends Fragment {
                                 String gameTitle = searchObject.getString("title");
                                 String plain = searchObject.getString("plain");
 
-
+                                //adds every plain to the 2nd query url seperated by "," except the last element
                                 if (i == searchArray.length())
                                 plainList = plainList + searchObject.getString("plain");
                                 else plainList = plainList + searchObject.getString("plain") + ",";
@@ -142,8 +151,8 @@ public class SearchFragment extends Fragment {
                             if (searchArray.length() <= 1){
                                 search_progressbar.setVisibility(View.INVISIBLE);
                                 Toast.makeText(search_list_view.getContext(), "no results found", Toast.LENGTH_LONG).show();
-
                             }
+
                             // if there are results
                             else {
                                 // second request INFO with plains
@@ -160,7 +169,7 @@ public class SearchFragment extends Fragment {
                                                         JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
                                                         plainMap.get(plain).image_url = plainSearchResult.getString("image");
                                                     }
-
+                                                    // third request for price info and shop per game
                                                     String INNER_JSON_REQUEST2 = "https://api.isthereanydeal.com/v01/game/overview/?key=0dfaaa8b017e516c145a7834bc386864fcbd06f5&plains="+plainList+country+region;
 
                                                     StringRequest stringRequest2 = new StringRequest(Request.Method.GET, INNER_JSON_REQUEST2,
@@ -171,7 +180,7 @@ public class SearchFragment extends Fragment {
                                                                         JSONObject obj = new JSONObject(response); //Complete JSONObject
                                                                         JSONObject obj_obj = obj.getJSONObject("data");  //only Data Object from Response
 
-                                                                        JSONObject obj_meta = obj.getJSONObject(".meta");
+                                                                        JSONObject obj_meta = obj.getJSONObject(".meta"); //meta info for currency USD EUR ...
                                                                         String currency = obj_meta.getString("currency");
 
                                                                         for (String plain : plainMap.keySet()){
@@ -179,13 +188,11 @@ public class SearchFragment extends Fragment {
 
                                                                             //plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" "+currency;
                                                                             //plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" "+currency;
-                                                                            //Price 2 digits after .
+                                                                            //Price 2 digits after "."
                                                                             Double price_historic_low_double = plainSearchResult.getJSONObject("lowest").getDouble("price");
                                                                             plainMap.get(plain).price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
-
                                                                             Double price_now_low_double = plainSearchResult.getJSONObject("price").getDouble("price");
                                                                             plainMap.get(plain).price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
-
 
                                                                             plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
                                                                             plainMap.get(plain).shopLink = plainSearchResult.getJSONObject("price").getString("url");
@@ -193,7 +200,7 @@ public class SearchFragment extends Fragment {
                                                                         }
                                                                         //creating custom adapter object
                                                                         AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(new ArrayList<>(plainMap.values()), getContext());
-                                                                        //MAKE PROGRESS INVISIBLE
+                                                                        //make progressbar invisible
                                                                         search_progressbar.setVisibility(View.INVISIBLE);
                                                                         //adding the adapter to listview
                                                                         search_list_view.setAdapter(adapter);
@@ -230,13 +237,11 @@ public class SearchFragment extends Fragment {
                                             }
                                         });
 
-
                                 //creating a request queue
                                 RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
                                 //adding the string request to request queue
                                 requestQueue.add(stringRequest1);
-
 
                                 }
                         } catch (JSONException e) {
@@ -249,17 +254,19 @@ public class SearchFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //displaying the error in toast if occurrs
+                        //displaying the error in toast if occurs
                         Toast.makeText(getActivity().getApplicationContext(), "error: timeout", Toast.LENGTH_SHORT).show();
                         search_progressbar.setVisibility(View.INVISIBLE);
                     }
                 });
+
         //creating a request queue
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
+        //setting timeout let the server time to respond else the view is maybe empty
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 50000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

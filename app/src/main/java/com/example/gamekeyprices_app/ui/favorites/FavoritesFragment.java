@@ -40,13 +40,16 @@ public class FavoritesFragment extends Fragment {
     private List<ListItem> favItemList = new ArrayList<>();
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
+    //variables for request
     private ArrayList<String> plainList = new ArrayList<String>();
     private ArrayList<String> plainListImage = new ArrayList<String>();
     private ArrayList<String> plainListTitle = new ArrayList<String>();
 
+    //variables for location
     public MainActivity iCountry;
     public MainActivity iRegion;
 
+    //progressbar
     private ProgressBar favorites_progressbar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -61,12 +64,15 @@ public class FavoritesFragment extends Fragment {
         favorites_progressbar = view.findViewById(R.id.progressBar_favorites);
         favorites_progressbar.setVisibility(View.VISIBLE);
 
+        //get country, region from main
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
         iRegion = (MainActivity) getActivity();
         String setRegion = iRegion.mRegionFromMain;
 
         loadData(setCountry,setRegion);
+
+        // TODO IMPLEMENT AGAIN -> WORKS WITHOUT JSON QUERY BEFORE
 /*
         // add item touch helper
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
@@ -101,21 +107,21 @@ public class FavoritesFragment extends Fragment {
             JSON_URL = JSON_URL.substring(0, JSON_URL.length() -1);
             String JSON_URLRegionized = JSON_URL+country+region;
 
-            StringRequest request = new StringRequest(StringRequest.Method.GET, JSON_URLRegionized,
+            StringRequest request = new StringRequest(Request.Method.GET, JSON_URLRegionized,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
-                                JSONObject obj = new JSONObject(response);
-                                JSONObject data = obj.getJSONObject("data");
+                                JSONObject obj = new JSONObject(response); //whole response
+                                JSONObject data = obj.getJSONObject("data"); //only object data from response
 
-                                JSONObject obj_meta = obj.getJSONObject(".meta");
+                                JSONObject obj_meta = obj.getJSONObject(".meta"); //meta info for currency USD EUR ...
                                 String currency = obj_meta.getString("currency");
 
                                 for(int i = 0; i<plainList.size(); i++) {
-                                    JSONObject favObj = data.getJSONObject(plainList.get(i));
-                                    JSONObject priceObj = favObj.getJSONObject("price");
-                                    JSONObject lowPriceObj = favObj.optJSONObject("lowest");
+                                    JSONObject favObj = data.getJSONObject(plainList.get(i)); //data obj from request for every game in favorite list
+                                    JSONObject priceObj = favObj.getJSONObject("price"); //json obj price now
+                                    JSONObject lowPriceObj = favObj.optJSONObject("lowest"); //json obj historical low price
 
                                     //String lowest_price_now = priceObj.getString("price") + " " + currency;
                                     //String historical_price_low = lowPriceObj.getString("price")  + " " + currency;
@@ -130,16 +136,16 @@ public class FavoritesFragment extends Fragment {
                                     String shopLink = priceObj.getString("url");
 
                                     favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i), shopLink));
-                                    //favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i));
                                 }
+                                //shut down progressbar
                                 favorites_progressbar.setVisibility(View.INVISIBLE);
                                 //creating custom adapter object
                                 AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(favItemList, getContext());
                                 //adding the adapter to listview
                                 favourite_view.setAdapter(adapter);
 
-
                             } catch (Exception e) {
+                                //shut down progressbar
                                 favorites_progressbar.setVisibility(View.INVISIBLE);
                                 e.printStackTrace();
                             }
@@ -150,7 +156,7 @@ public class FavoritesFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             favorites_progressbar.setVisibility(View.INVISIBLE);
-                            //displaying the error in toast if occurrs
+                            //displaying the error in toast if occurs
                             Toast.makeText(getActivity().getApplicationContext(), "no games on favorite list", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -161,6 +167,7 @@ public class FavoritesFragment extends Fragment {
             //adding the string request to request queue
             requestQueue.add(request);
 
+            //set timeout for response to prevent creating view before data is there
             request.setRetryPolicy(new DefaultRetryPolicy(
                     50000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -173,6 +180,8 @@ public class FavoritesFragment extends Fragment {
         }
 
     }
+
+    //TODO IMPLEMENT LATER - WORKS WITHOUT REQUEST ONLY WITH DB DATA
 /*
     // remove item after swipe
     private ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
