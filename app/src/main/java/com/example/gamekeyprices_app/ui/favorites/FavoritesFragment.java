@@ -42,7 +42,6 @@ public class FavoritesFragment extends Fragment {
     private ArrayList<String> plainList = new ArrayList<String>();
     private ArrayList<String> plainListImage = new ArrayList<String>();
     private ArrayList<String> plainListTitle = new ArrayList<String>();
-    private int ArrayListLength = 0;
 
     public MainActivity iCountry;
     public MainActivity iRegion;
@@ -90,7 +89,6 @@ public class FavoritesFragment extends Fragment {
                 plainList.add(request_Plain);
                 plainListImage.add(image);
                 plainListTitle.add(gameTitle);
-                ArrayListLength = ArrayListLength + 1;
             }
 
             JSON_URL = JSON_URL.substring(0, JSON_URL.length() -1);
@@ -107,14 +105,20 @@ public class FavoritesFragment extends Fragment {
                                 JSONObject obj_meta = obj.getJSONObject(".meta");
                                 String currency = obj_meta.getString("currency");
 
-                                for(int i = 0; i<ArrayListLength; i++) {
+                                for(int i = 0; i<plainList.size(); i++) {
                                     JSONObject favObj = data.getJSONObject(plainList.get(i));
                                     JSONObject priceObj = favObj.getJSONObject("price");
                                     JSONObject lowPriceObj = favObj.optJSONObject("lowest");
 
-                                    String lowest_price_now = priceObj.getString("price") + " " + currency;
+                                    //String lowest_price_now = priceObj.getString("price") + " " + currency;
+                                    //String historical_price_low = lowPriceObj.getString("price")  + " " + currency;
+                                    //Price 2 digits after .
+                                    Double lowest_price_now_double = priceObj.getDouble("price");
+                                    String lowest_price_now = String.format("%.2f", lowest_price_now_double) + " " + currency;
+                                    Double historical_price_low_double = lowPriceObj.getDouble("price");
+                                    String historical_price_low = String.format("%.2f", historical_price_low_double) + " " + currency;
+
                                     String cheapest_shop_now = priceObj.getString("store");
-                                    String historical_price_low = lowPriceObj.getString("price")  + " " + currency;
 
                                     String shopLink = priceObj.getString("url");
 

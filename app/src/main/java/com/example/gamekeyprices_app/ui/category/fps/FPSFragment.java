@@ -113,8 +113,14 @@ public class FPSFragment extends Fragment {
 
                                 //set plain titel better than no title atm
                                 String gameTitle = title[i];
-                                String price_historic_low = fpsArray.getJSONObject("lowest").getString("price")+ " " + currency;
-                                String price_now_low = fpsArray.getJSONObject("price").getString("price")+ " " + currency;
+
+                                //String price_historic_low = gArray.getJSONObject("lowest").getString("price")+ " " + currency;
+                                //String price_now_low = gArray.getJSONObject("price").getString("price")+ " " + currency;
+                                Double price_now_low_double = fpsArray.getJSONObject("price").getDouble("price");
+                                String price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
+                                Double price_historic_low_double = fpsArray.getJSONObject("lowest").getDouble("price");
+                                String price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
+
                                 String shop = fpsArray.getJSONObject("price").getString("store");
                                 String plain = fpsList[i];
 

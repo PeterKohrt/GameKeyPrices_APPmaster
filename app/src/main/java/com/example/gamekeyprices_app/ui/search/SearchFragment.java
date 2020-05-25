@@ -176,8 +176,17 @@ public class SearchFragment extends Fragment {
 
                                                                         for (String plain : plainMap.keySet()){
                                                                             JSONObject plainSearchResult = obj_obj.getJSONObject(plain); //only Data Object from Response
-                                                                            plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" "+currency;
-                                                                            plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" "+currency;
+
+                                                                            //plainMap.get(plain).price_historic_low = plainSearchResult.getJSONObject("lowest").getString("price")+" "+currency;
+                                                                            //plainMap.get(plain).price_now_low = plainSearchResult.getJSONObject("price").getString("price")+" "+currency;
+                                                                            //Price 2 digits after .
+                                                                            Double price_historic_low_double = plainSearchResult.getJSONObject("lowest").getDouble("price");
+                                                                            plainMap.get(plain).price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
+
+                                                                            Double price_now_low_double = plainSearchResult.getJSONObject("lowest").getDouble("price");
+                                                                            plainMap.get(plain).price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
+
+
                                                                             plainMap.get(plain).cheapest_shop_now = plainSearchResult.getJSONObject("price").getString("store");
                                                                             plainMap.get(plain).shopLink = plainSearchResult.getJSONObject("price").getString("url");
                                                                             plainMap.get(plain).favStatus = "0";

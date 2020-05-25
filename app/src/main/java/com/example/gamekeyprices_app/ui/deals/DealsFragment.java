@@ -37,6 +37,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,8 +106,14 @@ public class DealsFragment extends Fragment {
                                 JSONObject dealObject = gameDealArray.getJSONObject(i); //for each entry in list-object get DATA
 
                                 String gameTitle = dealObject.getString("title");
-                                String price_old = dealObject.getString("price_old") + " " + currency;
-                                String price_new = dealObject.getString("price_new") + " " + currency;
+
+                                //Price 2 digits after .
+                                Double price_old_double = dealObject.getDouble("price_old");
+                                String price_old = String.format("%.2f", price_old_double) + " " + currency;
+
+                                Double price_new_double = dealObject.getDouble("price_new");
+                                String price_new = String.format("%.2f", price_new_double) + " " + currency;
+
                                 String cut = dealObject.getString("price_cut")+" %";
                                 String plain = dealObject.getString("plain");
                                 String shopLink = dealObject.getJSONObject("urls").getString("buy");
