@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class FavoritesFragment extends Fragment {
     public MainActivity iCountry;
     public MainActivity iRegion;
 
+    private ProgressBar favorites_progressbar;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
@@ -54,6 +57,10 @@ public class FavoritesFragment extends Fragment {
         favourite_view = view.findViewById(R.id.fav_recycler);
         //favourite_view.setHasFixedSize(true);
         favourite_view.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        favorites_progressbar = view.findViewById(R.id.progressBar_favorites);
+
+        favorites_progressbar.setVisibility(View.VISIBLE);
 
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
@@ -71,6 +78,7 @@ public class FavoritesFragment extends Fragment {
 
     private void loadData(String country, String region) {
         if (favItemList != null) {
+            favorites_progressbar.setVisibility(View.INVISIBLE);
             favItemList.clear();
         }
         SQLiteDatabase db = favDB.getReadableDatabase();
@@ -125,7 +133,7 @@ public class FavoritesFragment extends Fragment {
                                     favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i), shopLink));
                                     //favItemList.add(new ListItem(plainListImage.get(i),plainListTitle.get(i),historical_price_low,lowest_price_now,cheapest_shop_now,"0",plainList.get(i));
                                 }
-
+                                favorites_progressbar.setVisibility(View.INVISIBLE);
                                 //creating custom adapter object
                                 AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(favItemList, getContext());
                                 //adding the adapter to listview
@@ -133,6 +141,7 @@ public class FavoritesFragment extends Fragment {
 
 
                             } catch (Exception e) {
+                                favorites_progressbar.setVisibility(View.INVISIBLE);
                                 e.printStackTrace();
                             }
 
@@ -141,6 +150,7 @@ public class FavoritesFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            favorites_progressbar.setVisibility(View.INVISIBLE);
                             //displaying the error in toast if occurrs
                             Toast.makeText(getActivity().getApplicationContext(), "no games on favorite list", Toast.LENGTH_SHORT).show();
                         }

@@ -186,6 +186,7 @@ public class DealsFragment extends Fragment {
                                                     deals_list_view.setAdapter(adapter);
 
                                                 } catch (JSONException e) {
+                                                    deals_progressbar.setVisibility(View.INVISIBLE);
                                                     e.printStackTrace();
                                                 }
                                             }
@@ -193,6 +194,7 @@ public class DealsFragment extends Fragment {
                                         new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
+                                                deals_progressbar.setVisibility(View.INVISIBLE);
                                                 //displaying the error in toast if occurrs
                                                 Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
@@ -204,6 +206,7 @@ public class DealsFragment extends Fragment {
                                 requestQueue.add(stringRequest);
                             }
                         } catch (JSONException e) {
+                            deals_progressbar.setVisibility(View.INVISIBLE);
                             e.printStackTrace();
                         }
 
