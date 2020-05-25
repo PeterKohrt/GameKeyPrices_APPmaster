@@ -183,7 +183,7 @@ public class SearchFragment extends Fragment {
                                                                             Double price_historic_low_double = plainSearchResult.getJSONObject("lowest").getDouble("price");
                                                                             plainMap.get(plain).price_historic_low = String.format("%.2f", price_historic_low_double) + " " + currency;
 
-                                                                            Double price_now_low_double = plainSearchResult.getJSONObject("lowest").getDouble("price");
+                                                                            Double price_now_low_double = plainSearchResult.getJSONObject("price").getDouble("price");
                                                                             plainMap.get(plain).price_now_low = String.format("%.2f", price_now_low_double) + " " + currency;
 
 
