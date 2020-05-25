@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,8 @@ public class HorrorFragment extends Fragment {
     private List<ListItem> game_list;
     private RecyclerView game_list_view;
 
+    private ProgressBar horror_progressbar;
+
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
@@ -54,6 +57,9 @@ public class HorrorFragment extends Fragment {
         allFragmentRecyclerAdapter = new AllFragmentRecyclerAdapter(game_list, getContext());
         game_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         game_list_view.setAdapter(allFragmentRecyclerAdapter);
+
+        horror_progressbar = view.findViewById(R.id.progressBar_horror);
+        horror_progressbar.setVisibility(View.VISIBLE);
 
         iCountry = (MainActivity) getActivity();
         String setCountry = iCountry.mCountryFromMain;
@@ -127,13 +133,14 @@ public class HorrorFragment extends Fragment {
 
                                 game_list.add(new ListItem(game_image_url, gameTitle, price_historic_low, price_now_low, shop, "0", plain, shopLink)); //CREATE ITEMS
                             }
-
+                            horror_progressbar.setVisibility(View.INVISIBLE);
                             //creating custom adapter object
                             AllFragmentRecyclerAdapter adapter = new AllFragmentRecyclerAdapter(game_list, getContext());
                             //adding the adapter to listview
                             game_list_view.setAdapter(adapter);
 
                         } catch (JSONException e) {
+                            horror_progressbar.setVisibility(View.INVISIBLE);
                             e.printStackTrace();
                         }
 
@@ -143,6 +150,7 @@ public class HorrorFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        horror_progressbar.setVisibility(View.INVISIBLE);
                         //displaying the error in toast if occurrs
                         Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }

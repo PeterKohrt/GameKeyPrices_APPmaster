@@ -59,7 +59,6 @@ public class FavoritesFragment extends Fragment {
         favourite_view.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         favorites_progressbar = view.findViewById(R.id.progressBar_favorites);
-
         favorites_progressbar.setVisibility(View.VISIBLE);
 
         iCountry = (MainActivity) getActivity();

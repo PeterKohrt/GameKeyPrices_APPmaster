@@ -63,7 +63,7 @@
         tools:layout="@layout/fragment_management" />
     <fragment
         android:id="@+id/nav_mmo"
-        android:name="com.example.gamekeyprices_app.ui.category.mmorpg.MMOFragment"
+        android:name="com.example.gamekeyprices_app.ui.category.mmo.MMOFragment"
         android:label="@string/menu_mmo"
         tools:layout="@layout/fragment_mmo" />
     <fragment

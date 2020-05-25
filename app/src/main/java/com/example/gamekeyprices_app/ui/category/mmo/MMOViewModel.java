@@ -1,4 +1,4 @@
-package com.example.gamekeyprices_app.ui.category.mmorpg;
+package com.example.gamekeyprices_app.ui.category.mmo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

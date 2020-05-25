@@ -4,7 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.category.mmorpg.MMOFragment">
+    tools:context=".ui.category.mmo.MMOFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar_mmo"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/colorPrimary"
+        android:forceHasOverlappingRendering="false"
+        android:foreground="@drawable/ic_action_name"
+        android:foregroundGravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorWhite"
+        android:padding="160dp"
+        android:progressTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mmo_recycler"
