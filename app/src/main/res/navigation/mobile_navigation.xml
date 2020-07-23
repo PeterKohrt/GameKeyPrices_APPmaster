@@ -7,77 +7,77 @@
 
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="com.example.gamekeyprices_app.ui.favorites.FavoritesFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/nav_deals"
-        android:name="com.example.gamekeyprices_app.ui.deals.DealsFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.deals.DealsFragment"
         android:label="@string/menu_deals"
         tools:layout="@layout/fragment_deals" />
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.example.gamekeyprices_app.ui.search.SearchFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.search.SearchFragment"
         android:label="@string/menu_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/nav_startpage"
-        android:name="com.example.gamekeyprices_app.ui.category.StartpageFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.StartpageFragment"
         android:label="@string/app_name"
     />
 
     <fragment
         android:id="@+id/nav_action"
-        android:name="com.example.gamekeyprices_app.ui.category.action.ActionFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.action.ActionFragment"
         android:label="@string/menu_action"
         tools:layout="@layout/fragment_action" />
 
     <fragment
         android:id="@+id/nav_adventure"
-        android:name="com.example.gamekeyprices_app.ui.category.adventure.AdventureFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.adventure.AdventureFragment"
         android:label="@string/menu_adventure"
         tools:layout="@layout/fragment_adventure" />
     <fragment
         android:id="@+id/nav_fps"
-        android:name="com.example.gamekeyprices_app.ui.category.fps.FPSFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.fps.FPSFragment"
         android:label="@string/menu_fps"
         tools:layout="@layout/fragment_fps" />
     <fragment
         android:id="@+id/nav_horror"
-        android:name="com.example.gamekeyprices_app.ui.category.horror.HorrorFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.horror.HorrorFragment"
         android:label="@string/menu_horror"
         tools:layout="@layout/fragment_horror" />
     <fragment
         android:id="@+id/nav_management"
-        android:name="com.example.gamekeyprices_app.ui.category.management.ManagementFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.management.ManagementFragment"
         android:label="@string/menu_management"
         tools:layout="@layout/fragment_management" />
     <fragment
         android:id="@+id/nav_mmo"
-        android:name="com.example.gamekeyprices_app.ui.category.mmo.MMOFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.mmo.MMOFragment"
         android:label="@string/menu_mmo"
         tools:layout="@layout/fragment_mmo" />
     <fragment
         android:id="@+id/nav_racing"
-        android:name="com.example.gamekeyprices_app.ui.category.racing.RacingFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.racing.RacingFragment"
         android:label="@string/menu_racing"
         tools:layout="@layout/fragment_racing" />
     <fragment
         android:id="@+id/nav_rpg"
-        android:name="com.example.gamekeyprices_app.ui.category.rpg.RPGFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.rpg.RPGFragment"
         android:label="@string/menu_rpg"
         tools:layout="@layout/fragment_rpg" />
     <fragment
         android:id="@+id/nav_sports"
-        android:name="com.example.gamekeyprices_app.ui.category.sports.SportsFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.sports.SportsFragment"
         android:label="@string/menu_sports"
         tools:layout="@layout/fragment_sports" />
     <fragment
         android:id="@+id/nav_strategy"
-        android:name="com.example.gamekeyprices_app.ui.category.strategy.StrategyFragment"
+        android:name="com.mcvm_app.gamekeyprices_app.ui.category.strategy.StrategyFragment"
         android:label="@string/menu_strategy"
         tools:layout="@layout/fragment_strategy" />
 </navigation>
