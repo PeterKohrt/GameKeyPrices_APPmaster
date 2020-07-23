@@ -7,41 +7,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc1474d1-134d-4c7f-bd9c-0c425c162ad6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/release/app-release.apk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/release/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/AllFragmentRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/AllFragmentRecyclerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsFragmentRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsFragmentRecyclerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/FavDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/FavDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ListItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ListItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/action/ActionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/action/ActionFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/adventure/AdventureFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/adventure/AdventureFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/fps/FPSFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/fps/FPSFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/horror/HorrorFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/horror/HorrorFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/management/ManagementFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/management/ManagementFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/mmo/MMOFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/mmo/MMOFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/racing/RacingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/racing/RacingFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/rpg/RPGFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/rpg/RPGFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/sports/SportsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/sports/SportsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/strategy/StrategyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/strategy/StrategyFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/deals/DealsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/deals/DealsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/favorites/FavoritesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/favorites/FavoritesFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/deals_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/deals_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_action.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_action.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_adventure.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_adventure.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deals.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deals.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_favorites.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_favorites.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fps.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_horror.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_horror.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_management.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_management.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mmo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_mmo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_racing.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_racing.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_rpg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_rpg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sports.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_sports.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_strategy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_strategy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gamekeyprices_app/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mcvm_app/gamekeyprices_app/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/AllFragmentRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/AllFragmentRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsFragmentRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/DealsFragmentRecyclerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/DealsItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/DealsItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/FavDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/FavDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ListItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ListItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/all/AllViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/all/AllViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/StartpageFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/StartpageFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/StartpageViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/StartpageViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/action/ActionFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/action/ActionFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/action/ActionViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/action/ActionViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/adventure/AdventureFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/adventure/AdventureFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/adventure/AdventureViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/adventure/AdventureViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/fps/FPSFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/fps/FPSFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/fps/FPSViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/fps/FPSViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/horror/HorrorFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/horror/HorrorFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/horror/HorrorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/horror/HorrorViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/management/ManagementFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/management/ManagementFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/management/ManagementViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/management/ManagementViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/mmo/MMOFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/mmo/MMOFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/mmo/MMOViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/mmo/MMOViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/racing/RacingFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/racing/RacingFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/racing/RacingViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/racing/RacingViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/rpg/RPGFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/rpg/RPGFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/rpg/RPGViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/rpg/RPGViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/sports/SportsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/sports/SportsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/sports/SportsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/sports/SportsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/strategy/StrategyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/strategy/StrategyFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/category/strategy/StrategyViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/category/strategy/StrategyViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/deals/DealsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/deals/DealsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/deals/DealsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/deals/DealsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/favorites/FavoritesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/favorites/FavoritesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/favorites/FavoritesViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/favorites/FavoritesViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/search/SearchFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gamekeyprices_app/ui/search/SearchViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mcvm_app/gamekeyprices_app/ui/search/SearchViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gamekeyprices_app/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mcvm_app/gamekeyprices_app/ExampleUnitTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,14 +77,25 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_APP_Key\key_gkpa.jks" />
+    <option name="KEY_ALIAS" value="gkpa" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cGIHpQsNVlVMEFKCeeKXxtYS6E" />
   <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ed902a63" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-05-25T21:03:12.268Z" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ExportApk.ApkPath" value="C:\Users\Peter Kohrt\AndroidStudioProjects\GameKeyPrices_App\app" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="ExportApk.SignV2" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/com" />
+    <property name="last_opened_file_path" value="D:/Google Drive/TU Ilmenau/Master/2. FS/Mobile Content Verwertungsmodelle/Projekt/Abgabe" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
