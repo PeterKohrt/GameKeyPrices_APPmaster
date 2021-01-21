@@ -80,7 +80,7 @@ public class ManagementFragment extends Fragment {
         final String g2 = "planetcoaster";
         final String g3 = "jurassicworldevolution";
         final String g4 = "citiesskylines";
-        final String g5 = "footballmanagerii0ii0";
+        final String g5 = "portroyaleiv";
         final String g6 = "farmingsimulatoriix";
         final String g7 = "twopointhospital";
         final String g8 = "transportfeverii";
@@ -107,7 +107,7 @@ public class ManagementFragment extends Fragment {
                             String[] list = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
 
                             //Helper Array to get ID for Game-Image-URL
-                            String[] picid = {"703080","493340","648350","255710","1100600","787860","535930","1066780","233450","415200"};
+                            String[] picid = {"703080","493340","648350","255710","1024650","787860","535930","1066780","233450","415200"};
                             String[] title = {
                                     "Planet Zoo",
                                     "Planet Coaster",
