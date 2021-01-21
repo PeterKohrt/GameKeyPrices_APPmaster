@@ -20,6 +20,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.mcvm_app.gamekeyprices_app.ListItem;
 import com.mcvm_app.gamekeyprices_app.MainActivity;
@@ -54,6 +65,9 @@ public class SearchFragment extends Fragment {
     //progressbar
     private ProgressBar search_progressbar;
 
+    //Interstitial AD
+    public InterstitialAd interstitialAd;
+
     // ADAPTER
     private AllFragmentRecyclerAdapter allFragmentRecyclerAdapter;
 
@@ -82,6 +96,19 @@ public class SearchFragment extends Fragment {
 
         search_progressbar.setVisibility(View.INVISIBLE);
 
+        //INITIALIZE BANNER AD AND SEND REQUEST
+        MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/3570937557");
+        final AdView mAdView = (AdView) view.findViewById(R.id.adView_search);
+        AdRequest adRequestBanner = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequestBanner);
+        //Toast.makeText(getContext().getApplicationContext(),mAdView.getAdUnitId().toString(),Toast.LENGTH_SHORT).show(); //| Контрольная работа
+
+        // Create the InterstitialAd + set the adUnitId + load Ad.
+        interstitialAd = new InterstitialAd(getContext());
+        interstitialAd.setAdUnitId("ca-app-pub-7677719599575905/7975186613");
+        //Toast.makeText(getContext().getApplicationContext(),interstitialAd.getAdUnitId().toString(),Toast.LENGTH_SHORT).show(); | Контрольная работа
+        AdRequest adRequestInterstitial = new AdRequest.Builder().build();
+        interstitialAd.loadAd(adRequestInterstitial);
 
         // on Query Text Listener -> ON Text Submit Query is loaded
         search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -93,8 +120,28 @@ public class SearchFragment extends Fragment {
                 Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
                 search_progressbar.setVisibility(View.VISIBLE);
 
+                interstitialAd.setAdListener(
+                        new AdListener() {
+                            @Override
+                            public void onAdLoaded() {
+                                //Toast.makeText(getContext().getApplicationContext(), "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onAdFailedToLoad(LoadAdError loadAdError) {
+                                String error =
+                                        String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+                                //Toast.makeText(getContext().getApplicationContext(), "onAdFailedToLoad() with error: " + error, Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onAdClosed() {
+                            }
+                        });
+
                 //gives user input as string to loadQuery for Request
                 loadQuery(mSearchText, setCountry, setRegion);
+                showInterstitial();
 
                 return false;
             }
@@ -272,5 +319,15 @@ public class SearchFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_TIMEOUT_MS));
     }
+
+    private void showInterstitial() {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+        if (interstitialAd != null && interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        } else {
+            //Toast.makeText(getContext().getApplicationContext(), "Ad did not load", Toast.LENGTH_SHORT).show(); | ELSE DO NOTHING!
+        }
+    }
+
 
 }
