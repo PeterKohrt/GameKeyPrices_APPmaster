@@ -97,8 +97,8 @@ public class SearchFragment extends Fragment {
         search_progressbar.setVisibility(View.INVISIBLE);
 
         //INITIALIZE BANNER AD AND SEND REQUEST
-        MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/3570937557");
-        final AdView mAdView = (AdView) view.findViewById(R.id.adView_search);
+        //MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/3570937557");
+        AdView mAdView = (AdView) view.findViewById(R.id.adView_search);
         AdRequest adRequestBanner = new AdRequest.Builder().build();
         mAdView.loadAd(adRequestBanner);
         //Toast.makeText(getContext().getApplicationContext(),mAdView.getAdUnitId().toString(),Toast.LENGTH_SHORT).show(); //| Контрольная работа

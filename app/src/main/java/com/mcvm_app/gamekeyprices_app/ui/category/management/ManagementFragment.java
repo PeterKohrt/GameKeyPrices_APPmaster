@@ -1,34 +1,34 @@
 package com.mcvm_app.gamekeyprices_app.ui.category.management;
 
-        import android.os.Bundle;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ProgressBar;
-        import android.widget.Toast;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-        import androidx.annotation.NonNull;
-        import androidx.fragment.app.Fragment;
-        import androidx.recyclerview.widget.LinearLayoutManager;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
-        import com.mcvm_app.gamekeyprices_app.ListItem;
-        import com.mcvm_app.gamekeyprices_app.MainActivity;
-        import com.mcvm_app.gamekeyprices_app.R;
-        import com.mcvm_app.gamekeyprices_app.ui.all.AllViewModel;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
+import com.mcvm_app.gamekeyprices_app.ListItem;
+import com.mcvm_app.gamekeyprices_app.MainActivity;
+import com.mcvm_app.gamekeyprices_app.R;
+import com.mcvm_app.gamekeyprices_app.ui.all.AllViewModel;
 
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManagementFragment extends Fragment {
     //works like every category fragment -> comments like in action
@@ -80,7 +80,7 @@ public class ManagementFragment extends Fragment {
         final String g2 = "planetcoaster";
         final String g3 = "jurassicworldevolution";
         final String g4 = "citiesskylines";
-        final String g5 = "footballmanagerii0ii0";
+        final String g5 = "portroyaleiv";
         final String g6 = "farmingsimulatoriix";
         final String g7 = "twopointhospital";
         final String g8 = "transportfeverii";
@@ -107,7 +107,7 @@ public class ManagementFragment extends Fragment {
                             String[] list = {g1,g2,g3,g4,g5,g6,g7,g8,g9,g10};
 
                             //Helper Array to get ID for Game-Image-URL
-                            String[] picid = {"703080","493340","648350","255710","1100600","787860","535930","1066780","233450","415200"};
+                            String[] picid = {"703080","493340","648350","255710","1024650","787860","535930","1066780","233450","415200"};
                             String[] title = {
                                     "Planet Zoo",
                                     "Planet Coaster",

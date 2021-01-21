@@ -78,7 +78,7 @@ public class MMOFragment extends Fragment {
         //define STRING for URL GET REQUEST by Plain
         final String g1 = "shellshocklive";
         final String g2 = "temtem";
-        final String g3= "towerunite";
+        final String g3 = "towerunite";
         final String g4 = "squad";
         final String g5 = "dragonballxenoverseii";
         final String g6 = "risingstormiivietnam";

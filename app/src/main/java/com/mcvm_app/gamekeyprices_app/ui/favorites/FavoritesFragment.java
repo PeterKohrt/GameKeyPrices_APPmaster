@@ -74,10 +74,10 @@ public class FavoritesFragment extends Fragment {
         String setRegion = iRegion.mRegionFromMain;
 
         //INITIALIZE AD
-        MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/8600791003");
-        AdView mAdView = (AdView) view.findViewById(R.id.adView_fav);
+        //MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/7975186613");
+        AdView myAdView = (AdView) view.findViewById(R.id.adView_fav);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        myAdView.loadAd(adRequest);
 
         loadData(setCountry,setRegion);
 
