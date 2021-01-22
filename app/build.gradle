@@ -49,10 +49,9 @@ dependencies {
     //location
     implementation 'com.google.android.gms:play-services-location:17.1.0'
 
-    //admob + inmobi + mopub + adcolony
+    //admob + inmobi + adcolony
     implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.google.ads.mediation:inmobi:9.1.1.0'
-    implementation 'com.google.ads.mediation:mopub:5.15.0.1'
     implementation 'com.google.ads.mediation:adcolony:4.3.0.0'
 
     //mediation test suite
