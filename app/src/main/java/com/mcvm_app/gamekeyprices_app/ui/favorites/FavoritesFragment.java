@@ -22,7 +22,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
@@ -77,6 +76,7 @@ public class FavoritesFragment extends Fragment {
         //MobileAds.initialize(getContext(), "ca-app-pub-7677719599575905/7975186613");
         AdView myAdView = (AdView) view.findViewById(R.id.adView_fav);
         AdRequest adRequest = new AdRequest.Builder().build();
+        //Toast.makeText(getContext().getApplicationContext(), adRequest.toString(), Toast.LENGTH_LONG).show();
         myAdView.loadAd(adRequest);
 
         loadData(setCountry,setRegion);

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class DealsFragmentRecyclerAdapter extends RecyclerView.Adapter <DealsFra
     }
 
     //methods for adapter
-    @NotNull
+    //@NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 

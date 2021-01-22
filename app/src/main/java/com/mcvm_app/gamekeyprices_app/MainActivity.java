@@ -24,6 +24,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.ads.mediationtestsuite.MediationTestSuite;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -83,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
         start_progressBar = findViewById(R.id.progressBar_start);
 
         check_permissions();
+
+        //INITIALIZE SDK
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        //FOR MEDIATION TESTING - DISABLE AT SOME POINT
+        MediationTestSuite.launch(this);
 
     }
 
