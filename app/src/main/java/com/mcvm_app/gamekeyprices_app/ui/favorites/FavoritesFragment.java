@@ -23,7 +23,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.mcvm_app.gamekeyprices_app.FavDB;
 import com.mcvm_app.gamekeyprices_app.ListItem;

@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7677719599575905~4290977538"/>
+            android:value="ca-app-pub-6392169959833277~3998545441"/>
 
         <activity
             android:name="com.mcvm_app.gamekeyprices_app.MainActivity"

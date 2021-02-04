@@ -24,12 +24,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import com.mcvm_app.gamekeyprices_app.AllFragmentRecyclerAdapter;
 import com.mcvm_app.gamekeyprices_app.ListItem;
@@ -104,8 +101,8 @@ public class SearchFragment extends Fragment {
 
         // Create the InterstitialAd + set the adUnitId + load Ad.
         interstitialAd = new InterstitialAd(getContext());
-        interstitialAd.setAdUnitId("ca-app-pub-7677719599575905/7975186613");
-        //Toast.makeText(getContext().getApplicationContext(),interstitialAd.getAdUnitId().toString(),Toast.LENGTH_SHORT).show(); | Контрольная работа
+        interstitialAd.setAdUnitId("ca-app-pub-6392169959833277/7884985419");
+        //Toast.makeText(getContext().getApplicationContext(),interstitialAd.getAdUnitId().toString(),Toast.LENGTH_SHORT).show(); //| Контрольная работа
         AdRequest adRequestInterstitial = new AdRequest.Builder().build();
         interstitialAd.loadAd(adRequestInterstitial);
 
