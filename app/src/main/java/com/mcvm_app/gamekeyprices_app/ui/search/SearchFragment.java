@@ -106,6 +106,25 @@ public class SearchFragment extends Fragment {
         AdRequest adRequestInterstitial = new AdRequest.Builder().build();
         interstitialAd.loadAd(adRequestInterstitial);
 
+   /*     interstitialAd.setAdListener(
+                new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+                        //Toast.makeText(getContext().getApplicationContext(), "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(LoadAdError loadAdError) {
+                        String error =
+                                String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
+                        //Toast.makeText(getContext().getApplicationContext(), "onAdFailedToLoad() with error: " + error, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAdClosed() {
+                    }
+                }); */
+
         // on Query Text Listener -> ON Text Submit Query is loaded
         search_View.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -116,24 +135,7 @@ public class SearchFragment extends Fragment {
                 Toast.makeText(getContext().getApplicationContext(),mSearchText , Toast.LENGTH_SHORT).show();
                 search_progressbar.setVisibility(View.VISIBLE);
 
-                interstitialAd.setAdListener(
-                        new AdListener() {
-                            @Override
-                            public void onAdLoaded() {
-                                //Toast.makeText(getContext().getApplicationContext(), "onAdLoaded()", Toast.LENGTH_SHORT).show();
-                            }
 
-                            @Override
-                            public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                String error =
-                                        String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage());
-                                //Toast.makeText(getContext().getApplicationContext(), "onAdFailedToLoad() with error: " + error, Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onAdClosed() {
-                            }
-                        });
 
                 //gives user input as string to loadQuery for Request
                 loadQuery(mSearchText, setCountry, setRegion);
@@ -321,7 +323,8 @@ public class SearchFragment extends Fragment {
         if (interstitialAd != null && interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
-            //Toast.makeText(getContext().getApplicationContext(), "Ad did not load", Toast.LENGTH_SHORT).show(); | ELSE DO NOTHING!
+            Toast.makeText(getContext().getApplicationContext(), "Ad did not load"
+                    , Toast.LENGTH_SHORT).show();
         }
     }
 
